@@ -54,7 +54,7 @@ const PageTransitions = ({ children, route }) => {
           <CSSTransition 
             key={route} 
             classNames="fade" 
-            timeout={2500}
+            timeout={2300}
             onEnter={playTransition}
             onExited={stopTransition}
           >

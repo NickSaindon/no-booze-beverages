@@ -5,72 +5,90 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { Store } from '../utils/Store';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import { Container, Row, Col } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
 import { ToastContainer, toast, Slide } from "react-toastify";
 
 const Cart = () => {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
-  const { cart: { cartItems }} = state;
+  const {
+    cart: { cartItems },
+  } = state;
 
   const removeItemHandler = (item) => {
     dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
 
-  const updateCartHandler = async (item, qty) => {
+  const updateCartHandler = (item, qty) => {
     const quantity = Number(qty);
-    const { data } = await axios.get(`/api/products/${item._id}`);
-    if (data.countInStock < quantity) {
-      return toast.error('Sorry. Product is out of stock');
+    const selectedSize = item.priceSizes.find((sizeSelected) => sizeSelected.packSize === item.sizeSelected);
+
+    if (quantity > selectedSize.countInStock) {
+      return toast.error('Sorry. Product is out of stock', {
+        theme: 'colored',
+      });
     }
+
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
-    toast.success('Product updated in the cart');
+    toast.success('Product updated in the cart', {
+      theme: 'colored',
+    });
   };
 
   return (
     <Layout title="No Booze Beverages | Product Cart">
-      <div className="cart-container bg-white">
-        <div className="container-fluid">
-          <div className="row text-center">
-            <h1 className="text-white">Shopping Cart</h1>
-          </div>
+      <ToastContainer 
+        position="top-center" 
+        draggable={false} 
+        transition={Slide} 
+        autoClose={5000}
+        hideProgressBar={true}
+        className="toast-alert"
+      />
+      <div className="cart-container page-contain bg-white py-5">
+        <Container fluid className="pt-5">
+          <Row className="text-center my-3">
+            <h1>Shopping Cart</h1>
+          </Row>
           {cartItems.length === 0 ? (
             <div className="empty-cart text-center">
               <h2 className="text-white">Shopping Cart is Empty</h2>
-              <Link href="/products" passHref>
+              <Link href="/products">
                 <button type="button" className="btn btn-link">Go make an order <i className="bi bi-arrow-right"></i></button>
               </Link>
             </div>
           ) : (
-            <div className="row">
-              <div className="col-lg-9 cart">
+            <Row>
+              <Col lg={9} className="cart">
                 {cartItems.map((item) => (
-                  <div className="card" key={item.slug}>
-                    <div className="card-body">
+                  <Card className="mb-2" key={item._id}>
+                    <Card.Body>
                       <div className="cart-row d-flex justify-content-between align-items-center">
                         <div className="product-img">
-                          <Image src={item.imageOne} className="d-block w-100" width={50} height={50} alt="..." />
+                          <Image src={item.imageOne} className="d-block w-100" width={100} height={100} alt="..." />
                         </div>
                         <div className="product-name d-flex align-items-center">
                           <p className="text-center">
-                            {item.name}
+                            {item.name}<br />
+                            {item.flavor}
                           </p>
                         </div>
+
                         <div className="product-siz d-flex align-items-center">
                           <p className="text-center">
-                            {item.size}
+                            {item.sizeSelected}
                           </p>
                         </div>
+
                         <div className="quantity-select text-center">
                           <span>Quantity</span>
-                          <select 
-                            className="form-select" 
+                          <select
+                            className="form-select"
                             value={item.quantity}
-                            onChange={(e) =>
-                              updateCartHandler(item, e.target.value)
-                            }
+                            onChange={(e) => updateCartHandler(item, e.target.value)}
                           >
-                            {[...Array(item.countInStock).keys()].map((x) => (
+                            {[...Array(item.priceSizes.find((sizeSelected) => sizeSelected.packSize === item.sizeSelected).countInStock).keys()].map((x) => (
                               <option key={x + 1} value={x + 1}>
                                 {x + 1}
                               </option>
@@ -90,25 +108,25 @@ const Cart = () => {
                           </button>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </Card.Body>
+                  </Card>
                 ))}
-              </div>
-              <div className="col-lg-3">
-                <div className="card checkout-card">
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-6">
+              </Col>
+              <Col lg={3}>
+                <Card>
+                  <Card.Body>
+                    <Row className="row py-5">
+                      <Col md={6} sm={6}>
                         <h5>
                           <b>Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}) :</b>
                         </h5>
-                      </div>
-                      <div className="col-6 text-end">
-                        <h5 className="text-white">
+                      </Col>
+                      <Col md={6} sm={6} className="text-end">
+                        <h5>
                           ${cartItems.reduce((a, c) => a + c.quantity * c.price, 0).toFixed(2)}
                         </h5>
-                      </div>
-                    </div>
+                      </Col>
+                    </Row>
                     <div className="d-grid gap-2">
                       <button 
                         className="w-100 btn btn-lg btn-outline-primary light"  
@@ -118,13 +136,13 @@ const Cart = () => {
                         Check Out
                       </button>
                     </div>                  
-                  </div>
-                </div>
-              </div>
-            </div>
-            )}
-          </div>
-        </div>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          )}
+        </Container>
+      </div>
     </Layout>
   );
 };

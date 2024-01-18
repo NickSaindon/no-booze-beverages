@@ -1,8 +1,13 @@
 import { useEffect } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/globals.scss';
+import '@/styles/editorStyles.scss';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { StoreProvider } from '@/utils/Store';
 import PageTransitions from '../components/PageTransitions';
 import { useRouter } from 'next/router';
+import Spinner from 'react-bootstrap/Spinner';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { SessionProvider, useSession } from 'next-auth/react';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
@@ -14,18 +19,22 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
 
   return (
     <SessionProvider session={session}>
-      <PageTransitions route={router.asPath}>
-        {Component.auth ? (
-          <Auth 
-            adminOnly={Component.auth.adminOnly} 
-            vendorOnly={Component.auth.vendorOnly}
-          >
-            <Component {...pageProps} />
-            </Auth>
-        ) : (
-            <Component {...pageProps} />
-        )}
-      </PageTransitions>
+      <StoreProvider>
+        <PageTransitions route={router.asPath}>
+        <PayPalScriptProvider deferLoading={true}>
+          {Component.auth ? (
+            <Auth 
+              adminOnly={Component.auth.adminOnly} 
+              vendorOnly={Component.auth.vendorOnly}
+            >
+              <Component {...pageProps} />
+              </Auth>
+            ) : (
+              <Component {...pageProps} />
+            )}
+          </PayPalScriptProvider>
+        </PageTransitions>
+      </StoreProvider>
     </SessionProvider>
   ) 
 }
@@ -39,7 +48,7 @@ function Auth({ children, adminOnly, vendorOnly }) {
     }
   });
   if ( status === 'loading') {
-    return <div>Loading...</div>;
+    return <Spinner animation="grow" />;
   }
   if (adminOnly && !session.user.isAdmin) {
     router.push('/unauthorized?message=admin login required');

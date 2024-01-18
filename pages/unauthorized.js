@@ -8,8 +8,8 @@ const Unauthorized = () => {
 
   return (
     <Layout title="Unauthorized Page">
-      <div className="unauthorized-container bg-black text-center">
-      <h1 className="text-white">Access Denied</h1>
+      <div className="unauthorized-container bg-white text-center">
+      <h1>Access Denied</h1>
       {message && <div className="message text-danger">{ message }</div>}
       </div>
     </Layout>

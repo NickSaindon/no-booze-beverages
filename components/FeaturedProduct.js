@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import Link from 'next/link'
 import Button from 'react-bootstrap/Button';
-import Carousel from 'react-grid-carousel'
+import Carousel from 'react-grid-carousel';
 
 const FeaturedProduct = () => {
   return (
@@ -10,11 +10,10 @@ const FeaturedProduct = () => {
       cols={3} 
       rows={1} 
       gap={0} 
-      hideArrow={true}
       responsiveLayout={[
         {
           breakpoint: 1200,
-          cols: 2
+          cols: 1
         },
         {
           breakpoint: 770,
@@ -28,7 +27,7 @@ const FeaturedProduct = () => {
           <h2>
             Checkout<br/>Sour Apple
           </h2>
-          <Link href="/product/sour-apple-kratom-soda">
+          <Link href="/products/kratom-soda/sour-apple-12oz">
             <Button variant="primary" size="lg">Details</Button>
           </Link>
         </div>        
@@ -38,7 +37,7 @@ const FeaturedProduct = () => {
           <h2>
             Checkout<br/>Creamy Peach
           </h2>
-          <Link href="/product/peachy-cream-kratom-soda">
+          <Link href="/products/kratom-soda/creamy-peach-12oz">
             <Button variant="primary" size="lg">Details</Button>
           </Link>
         </div>           
@@ -48,7 +47,7 @@ const FeaturedProduct = () => {
           <h2>
             Checkout<br/>Cherry Pop
           </h2>
-          <Link href="/product/cherry-pop-kratom-soda">
+          <Link href="/products/kratom-soda/cherry-pop-12oz">
             <Button variant="primary" size="lg">Details</Button>
           </Link>
         </div>   

@@ -1,18 +1,20 @@
-import { useContext } from 'react';
-import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import Link from 'next/link';
-// import { Store } from '../utils/Store';
+import gsap from 'gsap';
 
-const ProductItem = ({ product, addToCartHandler }) => {
-//   const { state, dispatch } = useContext(Store);
-  const router = useRouter();
+const ProductItem = ({ product, category }) => {
 
+  useEffect(() => {
+    gsap.timeline()
+    .fromTo(".product-card", { y:-100, opacity:0, ease: 1}, {y: 0, opacity: 1, stagger: 0.2  })
+    .delay(2.5);
+  }, []);
 
   return (
     <div className="col col-md-6 col-lg-4 d-flex justify-content-center mx-auto">
-      <div className="card shadow-sm">
+      <div className="card product-card shadow-sm">
         <Link 
-          href={`/product/${product.slug}`}
+          href={`/products/${category.slug}/${product.slug}`}
           legacyBehavior
         >
           <div className="card-img-container">
@@ -20,13 +22,12 @@ const ProductItem = ({ product, addToCartHandler }) => {
           </div>
         </Link>                  
         <div className="card-body text-primary text-center">
-          <h5 className="card-text">${product.price.toFixed(2)}</h5>
-          <h4 className="card-text">{product.name}</h4>
-          <h5 className="card-text">{product.flavor}</h5>
+          <h4 className="card-text fw-bold">{product.flavor}</h4>
+          <h5 className="card-text">{product.name}</h5>
           <div className="row">
-            <div className="col-lg-6 gy-2">
+            <div className="col-lg-12 gy-2">
               <Link 
-                href={`/product/${product.slug}`} 
+                href={`/products/${category.slug}/${product.slug}`} 
               >
                 <button 
                   type="button" 
@@ -35,15 +36,6 @@ const ProductItem = ({ product, addToCartHandler }) => {
                   Details
                 </button>
               </Link>
-            </div>
-            <div className="col-lg-6 gy-2">
-              <button 
-                type="button" 
-                className="w-100 btn btn-lg btn-outline-primary light"
-                onClick={() => addToCartHandler(product)}
-              >
-                Add To Cart
-              </button>
             </div>
           </div>
         </div>

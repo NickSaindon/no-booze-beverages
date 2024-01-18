@@ -50,7 +50,7 @@ const Signin = () => {
     <Layout 
       title="No Booze Beverages | Login"
       description="Login and start purchasing your Thai botanicales today with No Booze Beverages.  Our quality products and great prices are exactly what you have been looking for.">
-      <div className="login-container py-5 bg-white text-center">
+      <div className="login-container page-contain py-5 bg-white text-center">
         <div className="form-signin">
           <div className="row justify-content-md-center">
             <ToastContainer 

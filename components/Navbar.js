@@ -1,26 +1,64 @@
+import axios from 'axios';
 import { signOut, useSession } from 'next-auth/react';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useReducer } from 'react';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
 import Image from "next/image";
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-// import { Store } from '../utils/Store';
-import data from '../utils/data';
+import { Store } from '../utils/Store';
+import { getError } from '../utils/error';
 import DropdownLink from './DropdownLinks';
 
+function reducer(state, action) {
+  switch (action.type) {
+    case 'FETCH_REQUEST':
+      return { ...state, loading: true, error: '' };
+    case 'FETCH_SUCCESS':
+      return { ...state, loading: false, categories: action.payload, error: '' };
+    case 'FETCH_FAIL':
+      return { ...state, loading: false, error: action.payload };
+    default:
+    state;
+  }
+}
 
 const Navbar = () => {
   const { status, data: session } = useSession();
-  // const { state, dispatch } = useContext(Store);
-  // const { cart } = state;
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
   const router = useRouter();
- 
+  const [ cartItemsCount, setCartItemsCount ] = useState(0);
+  const [
+    { loading, error, categories },
+      dispatchCat,
+  ] = useReducer(reducer, {
+      loading: true,
+      categories: [],
+      error: '',
+    });
+
   const logoutClickHandler = () => {
-    // Cookies.remove('cart');
-    // dispatch({ type: 'CART_RESET' });
+    Cookies.remove('cart');
+    dispatch({ type: 'CART_RESET' });
     signOut({ callbackUrl: '/signin' });
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        dispatchCat({ type: 'FETCH_REQUEST' });
+        const { data } = await axios.get(`/api/categories`);
+        dispatchCat({ type: 'FETCH_SUCCESS', payload: data });
+      } catch (err) {
+        dispatchCat({ type: 'FETCH_FAIL', payload: getError(err) });
+      }
+    };
+
+    fetchData();
+
+    setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
+  }, [cart.cartItems])
 
   return (
     <nav className="navbar fixed-top navbar-expand-lg">
@@ -43,7 +81,7 @@ const Navbar = () => {
                 Products
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-              {data.categories.map((category) => (
+              {categories.sort((a, b) => a._id.localeCompare(b._id)).map((category) => (
                 <li key={category.slug}>
                   <Link href={`/category/${category.slug}`} className="dropdown-item">{category.name}</Link>
                 </li>
@@ -75,7 +113,12 @@ const Navbar = () => {
             <ul className="navbar-nav navbar-left me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link href="/cart" className={router.asPath == "/cart" ? "nav-link active" : "nav-link"}>
-                    <i className="bi bi-cart3"></i> 
+                  <i className="bi bi-cart3"></i> 
+                  {cartItemsCount > 0 && (
+                    <span className="badge rounded-pill bg-primary">
+                      {cartItemsCount}
+                    </span>
+                  )}
                 </Link>
               </li>
               <li className="nav-item">
@@ -112,7 +155,7 @@ const Navbar = () => {
                                 className="dropdown-item"
                                 href="/admin/dashboard"
                               >
-                                Admin Dashboard
+                                Dashboard
                               </DropdownLink>
                             </li>
                             <li>
@@ -150,9 +193,9 @@ const Navbar = () => {
                             <li>
                               <DropdownLink
                                 className="dropdown-item"
-                                href="/admin/news"
+                                href="/admin/blogs"
                               >
-                                News
+                                Blogs
                               </DropdownLink>
                             </li>
                           </>
@@ -170,7 +213,7 @@ const Navbar = () => {
                     </li>
                   </ul>
                   ) : (
-                    <Link href="/login" className={router.asPath == "/login" ? "nav-link active" : "nav-link"}>
+                    <Link href="/signin" className={router.asPath == "/signin" ? "nav-link active" : "nav-link"}>
                       Signin
                     </Link>
                   )}
@@ -183,4 +226,4 @@ const Navbar = () => {
   );
 }
 
-export default Navbar;
+export default dynamic(() => Promise.resolve(Navbar), { ssr: false });

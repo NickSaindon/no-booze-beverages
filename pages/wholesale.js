@@ -13,17 +13,16 @@ const Wholesale = () => {
   const [phone, setPhone] = useState("");
 
   useEffect(() => {
-    // gsap.timeline()
-    // .fromTo(".contact-text .header-one", { y:-100, opacity: 0, ease: 1, duration: 0.3 }, { y: 0, opacity: 1 })
-    // .fromTo(".contact-text .header-two", { opacity: 0, ease: 1, duration: 0.5 }, { opacity: 1 })
-    // .fromTo(".contact-text p", { y: 100, opacity: 0, ease: 1, duration: 0.3 }, { y: 0, opacity: 1})
-    // .delay(1.2);
+    gsap.timeline()
+    .fromTo(".wholesale-header", { opacity: 0, ease: 1, duration: 0.3 }, { opacity: 1 })
+    .fromTo(".wholesale-header h1", {y:-100, opacity:0, ease:"back", duration: 1}, {y:0, opacity: 1})
+    .delay(2);
   }, []);
 
   async function onSubmitForm(values) {
     let config = {
       method: 'post',
-      url: `${process.env.NEXT_PUBLIC_API_URL}/api/contact`,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/api/wholesale`,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -51,15 +50,15 @@ const Wholesale = () => {
     <Layout 
       title="No Booze Beverages | Wholesale Inquiries"
       description="Contact us today and findout more about our quality Thai botanical products.">
-      <div className="wholesale-container">
-        <ToastContainer 
-          position="top-center" 
-          draggable={false} 
-          transition={Slide} 
-          autoClose={8000}
-          hideProgressBar={true}
-          className="toast-alert"
-        />
+      <ToastContainer 
+        position="top-center" 
+        draggable={false} 
+        transition={Slide} 
+        autoClose={8000}
+        hideProgressBar={true}
+        className="toast-alert"
+      />
+      <div className="wholesale-container page-contain">
         <div className="wholesale-header">
           <h1>Wholesale Inquiries</h1>
         </div>

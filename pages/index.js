@@ -75,7 +75,7 @@ export default function Home() {
     <Layout 
       title="No Booze Beverages | Home" 
       description="No Booze Beverages is an online and retail seller of quality Thai botanicals.">
-      <div id="page" className="home-container">
+      <div id="page" className="home-container page-contain">
         <div className="home-header">
           <Container className="py-5">
             <Row className="row py-xs-1 py-sm-1 py-md-2 py-lg-5">
@@ -100,6 +100,15 @@ export default function Home() {
             </Row>
           </Container>
         </div>
+        <section className="bg-primary">
+          <Container>
+            <Row>
+              <Col className="text-center text-white py-4">
+                <h1>Featured Products</h1>
+              </Col>
+            </Row>
+          </Container>
+        </section>
         <section className="featured-product-section">
           <Container fluid>
             <Row>
@@ -141,10 +150,9 @@ export default function Home() {
               <Col sm={12} md={12} lg={6} className="py-5 m-auto">
                 <h1 className="text-primary text-center fw-bold">Working Together</h1>
                 <p className="lead">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim 
-                  id est laborum.                
+                  Join forces to create something extraordinary! No Booze Beverages welcomes collaborations with brands, influencers, kava bars, and anyone with aspirations 
+                  reaching for the stars. Whether you're bursting with innovative ideas, envisioning partnerships, or simply eager to concoct some flavor magic, we're all ears. Let's 
+                  transform the ordinary into the extraordinary, because together, we're an unstoppable force. Drop us a message, and let the collaboration commence!             
                 </p>
               </Col>
             </Row>
@@ -172,10 +180,10 @@ export default function Home() {
                 <Image src="/images/paper-airplane.png" className="paper-airplane" width={100} height={100} alt="Paper airplane to represent sending emails" />
                 <h1 className="text-primary text-center fw-bold py-3">Contact Us</h1>
                 <p className="lead">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim 
-                  id est laborum.                
+                  For any inquiries, feedback, or just to spread some positive vibes, connect with No Booze Beverages. Our dedicated team is here to assist
+                  you with any questions or concerns, treating your input like a treasure. We strive to provide exceptional service and flavor experiences.
+                  Whether you&#39;re a devoted Kranium enthusiast or taking your first sip of No Booze sodas, we welcome the opportunity to vibe with you. Cheers 
+                  to reaching new heights together!               
                 </p>
                 <div className="text-center">
                   <Button variant="primary" size="lg">Contact Us</Button>

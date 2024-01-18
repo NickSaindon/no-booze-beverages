@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Layout from '../components/Layout';
-// import { signIn, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -11,16 +11,16 @@ import NumberFormat from "react-number-format";
 import { ToastContainer, toast, Slide } from "react-toastify";
 
 const Register = () => {
-//   const { data: session } = useSession();
+  const { data: session } = useSession();
   
   const router = useRouter();
   const { redirect } = router.query;
 
-//   useEffect(() => {
-//     if (session?.user) {
-//       router.push(redirect || '/');
-//     }
-//   }, [router, session, redirect]);
+  useEffect(() => {
+    if (session?.user) {
+      router.push(redirect || '/');
+    }
+  }, [router, session, redirect]);
 
   const {
     handleSubmit,
@@ -31,37 +31,37 @@ const Register = () => {
   } = useForm();
 
   const submitHandler = async ({ name, email, birthDate, password }) => {
-    // try {
-    //   await axios.post('/api/auth/signup', {
-    //     name,
-    //     email,
-    //     birthDate,
-    //     password,
-    //   });
+    try {
+      await axios.post('/api/auth/signup', {
+        name,
+        email,
+        birthDate,
+        password,
+      });
 
-    //   const result = await signIn('credentials', {
-    //     redirect: false,
-    //     email,
-    //     password,
-    //   });
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
 
-    //   if (result.error) {
-    //     toast.error(result.error), {
-    //       theme: "colored"
-    //     };        
-    //   }
-    // } catch (err) {
-    //   toast.error(getError(err), {
-    //     theme: "colored"
-    //   });   
-    // }
+      if (result.error) {
+        toast.error(result.error), {
+          theme: "colored"
+        };        
+      }
+    } catch (err) {
+      toast.error(getError(err), {
+        theme: "colored"
+      });   
+    }
   };
 
   return (
     <Layout
       title="No Booze Beverages | Register Page"
       description="Register for No Booze Beverages and start purchasing some of the best quality kratom sodas.">
-      <div className="register-container bg-white text-center">
+      <div className="register-container page-contain bg-white text-center">
         <ToastContainer 
           position="top-center" 
           draggable={false} 
@@ -81,7 +81,6 @@ const Register = () => {
                   className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                   id="name"
                   placeholder="Full Name" 
-                  autoFocus
                   {...register('name', {
                     required: 'Please enter name',
                   })}
@@ -155,7 +154,6 @@ const Register = () => {
                   className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                   id="password"
                   placeholder="Password"
-                  autoFocus
                 />
                 {errors.password && (
                   <div className="invalid-feedback">

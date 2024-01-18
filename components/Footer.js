@@ -6,30 +6,33 @@ const Footer = () => {
     <div className="footer">
       <div className="container">
         <div className="row g-4 py-5">
-          <div className="col-lg-4 col-md-12">
+          <div className="col-lg-5 col-md-12">
             <div className="text-center g-4 py-3">
               <Image src="/images/no-booze-logo.png" width={125} height={125} alt="No Booze Beverages Logo"/>
             </div>
             <p>
-              Must be of legal age to purchase these products. No Booze Beverages assumes 
-              no liability for the misuse or misrepresentation of these products. Keep out of reach of children and pets. Avoid 
-              contact with eyes. We do not ship to the following US states, counties, and cities where kratom is banned: Alabama, 
-              Arkansas, Indiana, Rhode Island, Vermont, Wisconsin, Sarasota County (FL), Union County (NC), Denver (CO), and San Diego (CA).
+            FDA DISCLAIMER: This product is not for use by or sale to persons under the age of 18 or 21 depending on the laws of your governing 
+            state or territory. The statements made regarding these products have not been evaluated by the Food and Drug Administration. The 
+            efficacy of these products has not been confirmed by FDA-approved research. These products are not intended to diagnose, treat, cure 
+            or prevent any disease. All information from health care practitioners. Please consult your healthcare professional about potential 
+            interactions or other possible complications before using any product. The Federal Food, Drug, and Cosmetic Act requires this 
+            notice. By using this site you agree to follow the Privacy Policy and all Terms & Conditions printed on this site. Void Where 
+            Prohibited By Law. Derived from 100%
             </p>
           </div>
-          <div className="col-lg-4 col-md-12 mx-auto">
+          <div className="col-lg-3 col-md-12 mx-auto">
             <div className="footer-connect-links">
               <div className="social-media">
                 <ul>
                   <li>
-                    <Link href="https://www.facebook.com/Dragon-Organics-61552383274313" legacyBehavior>
+                    <Link href="#" legacyBehavior>
                       <a target="_blank" rel="noopener noreferrer">
                         <i className="bi bi-facebook" />
                       </a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="https://www.instagram.com/dragonorganics?igshid=NzZlODBkYWE4Ng" legacyBehavior>
+                    <Link href="#" legacyBehavior>
                       <a target="_black" rel="noopener noreferrer">
                         <i className="bi bi-instagram" />
                       </a>
@@ -56,28 +59,28 @@ const Footer = () => {
                   <h4>Explore</h4>
                   <ul>
                     <li>
-                      <Link href="/">
+                      <Link href="/about">
                         Our Journey
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">
+                      <Link href="/register">
                         Register
                       </Link>
                     </li>
                     <li>
-                      <Link href="/about">
+                      <Link href="/news">
                         News
                       </Link>
                     </li>
                     <li>
-                      <Link href="/news">
-                        Kratom Facts & FAQ
+                      <Link href="/kratom-faq">
+                        Kratom FAQ
                       </Link>
                     </li>
                     <li>
-                      <Link href="/register">
-                        Lab Results
+                      <Link href="/wholesale">
+                        Wholesale
                       </Link>
                     </li>
                   </ul>
@@ -85,45 +88,40 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-4 col-md-12">
+          <div className="col-lg-3 col-md-12">
             <div className="quick-links">
               <div className="footer-nav">
                 <h4>Quick Links</h4>
                 <ul>
                   <li>
-                    <Link href="/">
+                    <Link href="/signin">
                       My Account / Signin
                     </Link>
                   </li>
                   <li>
-                    <Link href="/about">
+                    <Link href="/contact">
                       Contact Us
                     </Link>
                   </li>
                   <li>
-                    <Link href="/news">
-                      Shipping / Refund Policies
+                    <Link href="/refund-policy">
+                      Refund Policies
                     </Link>
                   </li>
                   <li>
-                    <Link href="/register">
-                      Wholesale
+                    <Link href="/shipping-policy">
+                      Shipping Policies
                     </Link>
                   </li>
                 </ul> 
                 <ul>
                   <li>
                     <Link href="/privacy-policy">
-                      Find NNB Near Me
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/refund-policy">
                       Privacy Policy
                     </Link>
                   </li>
                   <li>
-                  <Link href="/terms-of-service">
+                    <Link href="/terms-of-service">
                       Terms of Service
                     </Link>
                   </li>
