@@ -1,4 +1,3 @@
-import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -20,15 +19,7 @@ function reducer(state, action) {
         return { ...state, loading: false, order: action.payload, error: '' };
       case 'FETCH_FAIL':
         return { ...state, loading: false, error: action.payload };
-      case 'PAY_REQUEST':
-        return { ...state, loadingPay: true };
-      case 'PAY_SUCCESS':
-        return { ...state, loadingPay: false, successPay: true };
-      case 'PAY_FAIL':
-        return { ...state, loadingPay: false, errorPay: action.payload };
-      case 'PAY_RESET':
-        return { ...state, loadingPay: false, successPay: false, errorPay: '' };
-  
+
       case 'DELIVER_REQUEST':
         return { ...state, loadingDeliver: true };
       case 'DELIVER_SUCCESS':
@@ -47,7 +38,7 @@ function reducer(state, action) {
     }
   }
 
-const OrderScreen = () => {
+function OrderScreen() {
     const { data: session } = useSession();
     // order/:id
   
@@ -59,7 +50,6 @@ const OrderScreen = () => {
       loading,
       error,
       order,
-      successPay,
       loadingDeliver,
       successDeliver,
     },
@@ -312,4 +302,5 @@ const OrderScreen = () => {
   )
 }
 
+OrderScreen.auth = true;
 export default OrderScreen;
