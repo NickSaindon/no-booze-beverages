@@ -13,23 +13,38 @@ function reducer(state, action) {
   switch (action.type) {
     case 'CART_ADD_ITEM': {
       const newItem = action.payload;
-      const existItem = state.cart.cartItems.find(
-        (item) => item._id === newItem._id
+      const existingItem = state.cart.cartItems.find(
+        (item) => item._id === newItem._id && item.packSizeSelected === newItem.packSizeSelected
       );
-      const cartItems = existItem
-        ? state.cart.cartItems.map((item) =>
-            item._id === existItem._id ? newItem : item
-          )
-        : [...state.cart.cartItems, newItem];
+    
+      if (existingItem) {
+        // Item with the same _id and size already exists, update quantity
+        const updatedCartItems = state.cart.cartItems.map((item) =>
+          item._id === existingItem._id && item.packSizeSelected === existingItem.packSizeSelected
+            ? { ...item, quantity: item.quantity + newItem.quantity }
+            : item
+        );
+    
+        Cookies.set('cartItems', JSON.stringify(updatedCartItems));
+    
+        return { ...state, cart: { ...state.cart, cartItems: updatedCartItems } };
+      }
+    
+      // Item not found, add as a new line item
+      const cartItems = [...state.cart.cartItems, newItem];
       Cookies.set('cartItems', JSON.stringify(cartItems));
+    
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     case 'CART_REMOVE_ITEM': {
-        const cartItems = state.cart.cartItems.filter(
-            (item) => item.slug !== action.payload.slug
-        );
-        Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
-        return { ...state, cart: { ...state.cart, cartItems } };
+      const itemToRemove = action.payload;
+      const updatedCartItems = state.cart.cartItems.filter(
+        (item) => !(item._id === itemToRemove._id && item.packSizeSelected === itemToRemove.packSizeSelected)
+      );
+
+      Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems: updatedCartItems }));
+
+      return { ...state, cart: { ...state.cart, cartItems: updatedCartItems } };
     }
     case 'CART_RESET':
       return {

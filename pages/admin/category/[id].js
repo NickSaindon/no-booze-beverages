@@ -201,7 +201,7 @@ const AdminCategoryEdit = ({ params }) => {
                             )}
                             <label htmlFor="slug">Slug</label>
                           </div>
-                          {isImageOne && ( <Image src={isImageOne} width={125} height={90} alt="Product Image One" /> )}
+                          {isImageOne && ( <Image src={isImageOne} width={192} height={90} alt="Product Image One" /> )}
                           <div className="form-floating">
                             <input
                               type="text"

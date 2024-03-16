@@ -44,7 +44,16 @@ function reducer(state, action) {
 const AdminProductEdit = ({ params }) => {
   const productId = params.id;
 
-  const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
+  const [{ 
+    loading, 
+    error, 
+    loadingUpdate, 
+    loadingFeaturedImage,
+    loadingImageOne, 
+    loadingImageTwo, 
+    loadingImageThree, 
+    loadingImageFour 
+  }, dispatch] =
     useReducer(reducer, {
       loading: true,
       error: '',
@@ -77,11 +86,9 @@ const AdminProductEdit = ({ params }) => {
           const { data } = await axios.get(`/api/admin/products/${productId}`);
           dispatch({ type: 'FETCH_SUCCESS' });
           data.priceSizes.map((priceSize, index) => {
-            console.log(index);
             setValue(`priceSizes.${index}.packSize`, data.priceSizes[index].packSize)
             setValue(`priceSizes.${index}.price`, data.priceSizes[index].price)
             setValue(`priceSizes.${index}.countInStock`, data.priceSizes[index].countInStock)
-            console.log(priceSize);
           })
           setValue('name', data.name);
           setValue('slug', data.slug);
@@ -122,9 +129,38 @@ const AdminProductEdit = ({ params }) => {
   }, [productId, setValue]);
 
   const router = useRouter();
+
+  const uploadFeatureHandler = async (e, imageFeatured = 'featuredImage') => {
+    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}/upload`;
+    try {
+      dispatch({ type: 'UPLOAD_REQUEST' });
+      const {
+        data: { signature, timestamp },
+      } = await axios('/api/admin/cloudinary-sign');
+
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('signature', signature);
+      formData.append('timestamp', timestamp);
+      formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY);
+      const { data } = await axios.post(url, formData);
+      dispatch({ type: 'UPLOAD_SUCCESS' });
+      setValue(imageFeatured, data.secure_url);
+
+      toast.success('File uploaded successfully', {
+        theme: 'colored'
+      });
+    } catch (err) {
+      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
+      toast.error(getError(err), {
+        theme: 'colored'
+      });
+    }
+  };
   
   const uploadHandler = async (e, imageFieldOne = 'imageOne') => {
-    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`;
+    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}/upload`;
     try {
       dispatch({ type: 'UPLOAD_REQUEST' });
       const {
@@ -141,7 +177,9 @@ const AdminProductEdit = ({ params }) => {
       dispatch({ type: 'UPLOAD_SUCCESS' });
       setValue(imageFieldOne, data.secure_url);
 
-      toast.success('File uploaded successfully');
+      toast.success('File uploaded successfully', {
+        theme: 'colored'
+      });
     } catch (err) {
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
       toast.error(getError(err), {
@@ -151,7 +189,7 @@ const AdminProductEdit = ({ params }) => {
   };
 
   const uploadImageTwoHandler = async (e, imageFieldTwo = 'imageTwo') => {
-    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`;
+    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}/upload`;
     try {
       dispatch({ type: 'UPLOAD_REQUEST' });
       const {
@@ -168,7 +206,9 @@ const AdminProductEdit = ({ params }) => {
       dispatch({ type: 'UPLOAD_SUCCESS' });
       setValue(imageFieldTwo, data.secure_url);
 
-      toast.success('File uploaded successfully');
+      toast.success('File uploaded successfully', {
+        theme: 'colored'
+      });
     } catch (err) {
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
       toast.error(getError(err), {
@@ -178,7 +218,7 @@ const AdminProductEdit = ({ params }) => {
   };
 
   const uploadImageThreeHandler = async (e, imageFieldThree = 'imageThree') => {
-    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`;
+    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}/upload`;
     try {
       dispatch({ type: 'UPLOAD_REQUEST' });
       const {
@@ -195,7 +235,9 @@ const AdminProductEdit = ({ params }) => {
       dispatch({ type: 'UPLOAD_SUCCESS' });
       setValue(imageFieldThree, data.secure_url);
 
-      toast.success('File uploaded successfully');
+      toast.success('File uploaded successfully', {
+        theme: 'colored'
+      });
     } catch (err) {
       dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
       toast.error(getError(err), {
@@ -205,7 +247,7 @@ const AdminProductEdit = ({ params }) => {
   };
 
   const uploadImageFourHandler = async (e, imageFieldFour = 'imageFour') => {
-    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`;
+    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}/upload`;
     try {
       dispatch({ type: 'UPLOAD_REQUEST' });
       const {
@@ -233,35 +275,6 @@ const AdminProductEdit = ({ params }) => {
     }
   };
 
-  const uploadFeaturedImageHandler = async (e, imageFieldFour = 'imageFour') => {
-    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`;
-    try {
-      dispatch({ type: 'UPLOAD_REQUEST' });
-      const {
-        data: { signature, timestamp },
-      } = await axios('/api/admin/cloudinary-sign');
-
-      const file = e.target.files[0];
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('signature', signature);
-      formData.append('timestamp', timestamp);
-      formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY);
-      const { data } = await axios.post(url, formData);
-      dispatch({ type: 'UPLOAD_SUCCESS' });
-      setValue(imageFieldFour, data.secure_url);
-
-      toast.success('File uploaded successfully', {
-        theme: 'colored'
-      });
-    } catch (err) {
-      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
-      toast.error(getError(err), {
-        theme: 'colored'
-      });
-    }
-  };
-  
   const submitHandler = async ({
     name,
     flavor,
@@ -279,7 +292,6 @@ const AdminProductEdit = ({ params }) => {
     featured = isFeatured
   }) => {
     try {
-      console.log(priceSizes[0].packSize)
       dispatch({ type: 'UPDATE_REQUEST' });
       await axios.put(`/api/admin/products/${productId}`, {
         name,
@@ -409,9 +421,10 @@ const AdminProductEdit = ({ params }) => {
                               Upload Image
                               <input 
                                 type="file" 
-                                id="featuredImage"
+                                id="ImageFeatured"
+                                onChange={uploadFeatureHandler}
                               />
-                              {loadingUpload && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
+                              {loadingFeaturedImage && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
                             </div>
                           </div>
                           <div className="form-check my-3">
@@ -538,8 +551,9 @@ const AdminProductEdit = ({ params }) => {
                               <input 
                                 type="file" 
                                 id="imageFile"
+                                onChange={uploadHandler}
                               />
-                              {loadingUpload && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
+                              {loadingImageOne && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
                             </div>
                           </div>
                           {isImageTwo && ( <Image src={isImageTwo} width={125} height={90} alt="Product Image Two" /> )}
@@ -562,9 +576,10 @@ const AdminProductEdit = ({ params }) => {
                               <input 
                                 type="file" 
                                 id="imageFileTwo"
+                                onChange={uploadImageTwoHandler}
                               />
                             </div>
-                            {loadingUpload && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
+                            {loadingImageTwo && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
                           </div>
                           {isImageThree && ( <Image src={isImageThree} width={125} height={90} alt="Product Image Three" /> )}
                           <div className="form-floating">
@@ -586,9 +601,10 @@ const AdminProductEdit = ({ params }) => {
                               <input 
                                 type="file" 
                                 id="imageFileThree"
+                                onChange={uploadImageThreeHandler}
                               />
                             </div>
-                            {loadingUpload && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
+                            {loadingImageThree && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
                           </div>
                           {isImageFour && ( <Image src={isImageFour} width={125} height={90} alt="Product Image Four" /> )}
                           <div className="form-floating">
@@ -610,8 +626,9 @@ const AdminProductEdit = ({ params }) => {
                               <input 
                                 type="file" 
                                 id="imageFileFour"
+                                onChange={uploadImageFourHandler}
                               />
-                              {loadingUpload && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
+                              {loadingImageFour && <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />}
                             </div>
                           </div>
                         </Col>

@@ -28,8 +28,8 @@ export default async (req, res) => {
           <title>No Booze Beverages Wholesale Form</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
           <style>
-            .ReadMsgBody {width: 100%; background-color: #000000; color: #ffffff}
-            .ExternalClass {width: 100%; background-color: #000000; color: #ffffff}
+            .ReadMsgBody {width: 100%; background-color: #ffffff; color: #000000}
+            .ExternalClass {width: 100%; background-color: #ffffff; color: #000000}
             @-ms-viewport { 
                 width: device-width; 
             }
@@ -43,14 +43,14 @@ export default async (req, res) => {
                   <tbody>
                     <tr>
                       <td align="center">
-                        <table id="intro" cellpadding="0" cellspacing="0" border="0" bgcolor="#000000" align="center" style="width: 100%; padding: 0; margin: 0; background-image: url(https://github.com/NickSaindon/dragon-organics/blob/main/public/images/wholesale-header.jpg?raw=true); background-size: auto 102%; background-position: center center; background-repeat: no-repeat; background-color: #000000">
+                        <table id="intro" cellpadding="0" cellspacing="0" border="0" bgcolor="#000000" align="center" style="width: 100%; padding: 0; margin: 0; background-image: url(https://github.com/NickSaindon/no-booze-beverages/blob/main/public/images/wholesale-header.jpg?raw=true); background-size: auto 102%; background-position: center center; background-repeat: no-repeat; background-color: #ffffff">
                           <tbody >
                             <tr><td colspan="3" height="20"></td></tr>
                             <tr>
                               <td width="90" style="width: 9%;"></td>
                               <td align="center">
                                 <div border="0" style="border: none; height: 60px;">
-                                  <img src="https://github.com/NickSaindon/dragon-organics/blob/main/public/images/no-booze-logo.png?raw=true" alt="No Booze Logo" width="154" height="200" border="0" style="border: none; display: block; -ms-interpolation-mode: bicubic;">
+                                  <img src="https://github.com/NickSaindon/no-booze-beverages/blob/main/public/images/no-booze-logo.png?raw=true" alt="No Booze Logo" width="150" height="150" border="0" style="border: none; display: block; -ms-interpolation-mode: bicubic;">
                                 </div>
                               </td>
                               <td width="90" style="width: 9%;"></td>
@@ -97,7 +97,7 @@ export default async (req, res) => {
                             <tr><td colspan="3" height="85"></td></tr>
                           </tbody>
                         </table>
-                        <table id="icon__article" class="device" cellpadding="0" cellspacing="0" border="0" bgcolor="#000000" align="center" style="width: 100%; padding: 0; margin: 0; background-color: #000000">
+                        <table id="icon__article" class="device" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" align="center" style="width: 100%; padding: 0; margin: 0; background-color: #ffffff">
                           <tbody>								
                             <tr>
                               <td align="center">
@@ -108,10 +108,10 @@ export default async (req, res) => {
                                     <tr>
                                       <td width="80" style="width: 8%;"></td>
                                       <td align="center">
-                                        <h3 border="0" style="border: none; line-height: 14px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
+                                        <h3 border="0" style="border: none; line-height: 14px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
                                           Name
                                         </h3>
-                                        <p style="line-height: 20px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
+                                        <p style="line-height: 20px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
                                           ${name}
                                         </p>
                                       </td>
@@ -133,10 +133,10 @@ export default async (req, res) => {
                                   <tr>
                                     <td width="80" style="width: 8%;"></td>
                                     <td align="center">
-                                      <h3 border="0" style="border: none; line-height: 14px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
+                                      <h3 border="0" style="border: none; line-height: 14px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
                                        Company Name
                                       </h3>
-                                      <p style="line-height: 20px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
+                                      <p style="line-height: 20px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
                                         ${companyName}
                                       </p>
                                     </td>
@@ -158,10 +158,10 @@ export default async (req, res) => {
                                     <tr>
                                       <td width="80" style="width: 8%;"></td>
                                       <td align="center">
-                                        <h3 border="0" style="border: none; line-height: 14px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
+                                        <h3 border="0" style="border: none; line-height: 14px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
                                           Email
                                         </h3>
-                                        <p style="line-height: 20px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
+                                        <p style="line-height: 20px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
                                           ${email}
                                         </p>
                                       </td>
@@ -183,10 +183,10 @@ export default async (req, res) => {
                                     <tr>
                                       <td width="80" style="width: 8%;"></td>
                                       <td align="center">
-                                        <h3 border="0" style="border: none; line-height: 14px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
+                                        <h3 border="0" style="border: none; line-height: 14px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
                                           Phone Number
                                         </h3>
-                                        <p style="line-height: 20px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
+                                        <p style="line-height: 20px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
                                           ${phone}
                                         </p>
                                       </td>
@@ -209,10 +209,10 @@ export default async (req, res) => {
                                   <tr>
                                     <td width="80" style="width: 8%;"></td>
                                     <td align="center">
-                                      <h3 border="0" style="border: none; line-height: 14px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
+                                      <h3 border="0" style="border: none; line-height: 14px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
                                         Website Address
                                       </h3>
-                                      <p style="line-height: 20px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
+                                      <p style="line-height: 20px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
                                         ${websiteAddress}
                                       </p>
                                     </td>
@@ -235,10 +235,10 @@ export default async (req, res) => {
                                   <tr>
                                     <td width="80" style="width: 8%;"></td>
                                     <td align="center">
-                                      <h3 border="0" style="border: none; line-height: 14px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
+                                      <h3 border="0" style="border: none; line-height: 14px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
                                         EIN
                                       </h3>
-                                      <p style="line-height: 20px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
+                                      <p style="line-height: 20px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;"> 
                                         ${ein}
                                       </p>
                                     </td>
@@ -255,35 +255,27 @@ export default async (req, res) => {
                               </div>	
                               </td>
                             </tr>
-                            <tr> <td colspan="5" height="40"></td> </tr>
                           </tbody>
                         </table>						
-                        <table id="icon__article" class="device" cellpadding="0" cellspacing="0" border="0" bgcolor="#000000" align="center" style="width: 100%; padding: 0; margin: 0; background-color: #000000">
+                        <table id="icon__article" class="device" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" align="center" style="width: 100%; padding: 0; margin: 0; background-color: #ffffff">
                           <tbody>								
                             <tr>
                               <td align="center">
                                 <div style="display: inline-block;">
                                   <table width="98%" align="center" cellpadding="0" cellspacing="0" border="0" style="padding: 0; margin: 0; mso-table-lspace:0pt; mso-table-rspace:0pt;"  class="article">
                                   <tbody>
-                                    <tr> <td colspan="3" height="40"></td> </tr>
                                     <tr>
-                                      <td width="80" style="width: 8%;"></td>
                                       <td align="center">
-                                        <h3 border="0" style="border: none; line-height: 14px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
+                                        <h3 border="0" style="border: none; line-height: 14px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-transform: uppercase; font-weight: normal; overflow: hidden; margin:17px 0 0px 0;">
                                           Message
                                         </h3>
-                                        <p style="line-height: 20px; color: #ffffff; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;">
+                                        <p style="line-height: 20px; color: #000000; font-family: Verdana, Geneva, sans-serif; font-size: 16px; text-align: center; overflow: hidden; margin: 10px 0; mso-table-lspace:0;mso-table-rspace:0;">
                                           ${message}
                                         </p>
                                       </td>
                                       <td width="80" style="width: 8%;"></td>
                                     </tr>
-                                    <tr><td colspan="3" height="10"></td></tr>					
-                                    <tr>
-                                      <td colspan="3" height="5" valign="top" align="center">
-                                        <img src="https://github.com/lime7/responsive-html-template/blob/master/index/line-2.png?raw=true" alt="line" border="0" width="960" height="5" style="border: none; outline: none; max-width: 960px; width: 100%; -ms-interpolation-mode: bicubic;" >
-                                      </td>
-                                    </tr>						
+                                    <tr><td colspan="3" height="10"></td></tr>										
                                   </tbody>
                                   </table>
                                 </div>						
@@ -292,7 +284,7 @@ export default async (req, res) => {
                             <tr> <td colspan="5" height="40"></td> </tr>
                           </tbody>
                         </table>
-                        <table id="news__article" cellpadding="0" cellspacing="0" border="0" bgcolor="#000000" align="center" style="width: 100%; padding: 0; margin: 0; background-color: #000000">
+                        <table id="news__article" cellpadding="0" cellspacing="0" border="0" bgcolor="#207a00" align="center" style="width: 100%; padding: 0; margin: 0; background-color: #207a00">
                           <tbody>
                             <tr><td colspan="3" height="23"></td></tr>
                             <tr>

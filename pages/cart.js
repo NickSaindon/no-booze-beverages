@@ -22,15 +22,26 @@ const Cart = () => {
 
   const updateCartHandler = (item, qty) => {
     const quantity = Number(qty);
-    const selectedSize = item.priceSizes.find((sizeSelected) => sizeSelected.packSize === item.sizeSelected);
-
+  
+    if (quantity <= 0) {
+      return toast.error('Quantity must be greater than zero', {
+        theme: 'colored',
+      });
+    }
+  
+    const selectedSize = item.priceSizes.find((packSizeSelected) => packSizeSelected.packSize === item.packSizeSelected);
+  
     if (quantity > selectedSize.countInStock) {
       return toast.error('Sorry. Product is out of stock', {
         theme: 'colored',
       });
     }
-
-    dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+  
+    dispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...item, quantity: quantity - item.quantity }, // Adjust quantity based on the difference
+    });
+  
     toast.success('Product updated in the cart', {
       theme: 'colored',
     });
@@ -62,7 +73,7 @@ const Cart = () => {
             <Row>
               <Col lg={9} className="cart">
                 {cartItems.map((item) => (
-                  <Card className="mb-2" key={item._id}>
+                  <Card className="mb-2" key={`${item._id}-${item.packSizeSelected}`}>
                     <Card.Body>
                       <div className="cart-row d-flex justify-content-between align-items-center">
                         <div className="product-img">
@@ -77,7 +88,7 @@ const Cart = () => {
 
                         <div className="product-siz d-flex align-items-center">
                           <p className="text-center">
-                            {item.sizeSelected}
+                            {item.packSizeSelected}
                           </p>
                         </div>
 
@@ -88,7 +99,7 @@ const Cart = () => {
                             value={item.quantity}
                             onChange={(e) => updateCartHandler(item, e.target.value)}
                           >
-                            {[...Array(item.priceSizes.find((sizeSelected) => sizeSelected.packSize === item.sizeSelected).countInStock).keys()].map((x) => (
+                            {[...Array(item.priceSizes.find((packSizeSelected) => packSizeSelected.packSize === item.packSizeSelected).countInStock).keys()].map((x) => (
                               <option key={x + 1} value={x + 1}>
                                 {x + 1}
                               </option>

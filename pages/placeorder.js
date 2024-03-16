@@ -1,4 +1,4 @@
-import { useContext, useState, useReducer, useEffect } from 'react';
+import { useContext, useState, useReducer } from 'react';
 import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
 import dynamic from 'next/dynamic';
@@ -6,13 +6,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { getError } from '../utils/error';
 import Cookies from 'js-cookie';
 import { Container, Row, Col } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
-import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
+import DirectPost from '../utils/directPost'; 
 import { ToastContainer, toast, Slide } from "react-toastify";
-import moment from 'moment';
+import { Controller, useForm } from 'react-hook-form';
+import NumberFormat from "react-number-format";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -36,174 +36,138 @@ function reducer(state, action) {
 }
 
 const PlaceOrder = () => {
-  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
-
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
   const { cartItems, shippingAddress } = cart;
 
-  const [orderId, setOrderId] = useState(null);
-
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
-
-  const [poLoading, setPoLoading] = useState(false);
   
   const [
     {
       loading,
       error,
-      order,
-      successPay,
-      loadingPay
+      order
     },
-    orderDispatch,
   ] = useReducer(reducer, {
     loading: false, // Set initial loading state to false
     order: {},
     error: '',
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        orderDispatch({ type: 'FETCH_REQUEST' });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm();
+
+  const [dp, setDp] = useState(null); // DirectPost instance
+  const [isAddress, setIsAddress] = useState(true)
+
+  // useEffect(() => {
+
+  //   setDp(new DirectPost('{security_key}')); // Initialize DirectPost instance
+
+  //   const fetchData = async () => {
+  //     try {
+  //       orderDispatch({ type: 'FETCH_REQUEST' });
   
-        // Use orderId if available, otherwise fetch it from the API
-        const orderToFetch = orderId ? orderId : data.id;
-        console.log('Order Id', orderId);
-        const { data } = await axios.get(`/api/orders/${JSON.parse(JSON.stringify(orderToFetch))}`);
-        orderDispatch({ type: 'FETCH_SUCCESS', payload: data });
-        console.log('Data fetched successfully:', data);
-      } catch (err) {
-        orderDispatch({ type: 'FETCH_FAIL', payload: getError(err) });
-        console.error('Error fetching data:', err);
-      }
-    };
+  //       // Use orderId if available, otherwise fetch it from the API
+  //       const orderToFetch = orderId ? orderId : data.id;
+  //       console.log('Order Id', orderId);
+  //       const { data } = await axios.get(`/api/orders/${JSON.parse(JSON.stringify(orderToFetch))}`);
+  //       orderDispatch({ type: 'FETCH_SUCCESS', payload: data });
+  //       console.log('Data fetched successfully:', data);
+  //     } catch (err) {
+  //       orderDispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+  //       console.error('Error fetching data:', err);
+  //     }
+  //   };
   
-    const loadPaypalScript = async () => {
-      try {
-        const { data: clientId } = await axios.get('/api/keys/paypal');
-        paypalDispatch({
-          type: 'resetOptions',
-          value: {
-            'client-id': clientId,
-            currency: 'USD',
-          },
-        });
-        paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
-        console.log('PayPal script loaded successfully');
-      } catch (err) {
-        console.error('Error loading PayPal script:', err);
-      }
-    };
-  
-    if (successPay && orderId) {
-      console.log('enter if statement');
-      fetchData();
-      orderDispatch({ type: 'PAY_RESET' });
-      dispatch({ type: 'CART_CLEAR_ITEMS' });
-      router.push('/order-success');
-    } else {
-      console.log('enter else statement');
-      if (!orderId) {
-        console.log("loading paypal script");
-        loadPaypalScript();
-      }
-    }
-  }, [orderId, successPay, paypalDispatch]);
+  //   if (successPay && orderId) {
+  //     console.log('enter if statement');
+  //     fetchData();
+  //     orderDispatch({ type: 'PAY_RESET' });
+  //     dispatch({ type: 'CART_CLEAR_ITEMS' });
+  //     router.push('/order-success');
+  //   } else {
+  //     console.log('enter else statement');
+  //   }
+  // }, [orderId, successPay]);
 
     const {
-      orderItems,
       itemsPrice = round2(
         cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
       ),
       taxPrice = round2(itemsPrice * 0.15),
       shippingPrice = itemsPrice > 200 ? 0 : 15,
-      totalPrice = round2(itemsPrice + shippingPrice + taxPrice),
-      isPaid,
-      paidAt,
+      totalPrice = round2(itemsPrice + shippingPrice + taxPrice)
     } = order;
 
-    const placeOrderHandler = async () => {
+    const submitHandler = async ({ first_name, last_name, ccnumber, ccexp, cvv, address1, city, state, zip }) => {
       try {
-        setPoLoading(true);
-        const { data } = await axios.post('/api/orders', {
-          orderItems: cartItems,
-          shippingAddress,
-          itemsPrice,
-          shippingPrice,
-          taxPrice,
-          totalPrice,
-        });
-        setOrderId(data._id); // Store the order ID
-        setPoLoading(false);
-        orderDispatch({ type: 'CART_CLEAR_ITEMS' });
-        Cookies.set(
-          'cart',
-          JSON.stringify({
-            ...cart,
-            cartItems: [],
-          })
-        );
-      } catch (err) {
-        setPoLoading(false);
-        toast.error(getError(err), {
-          theme: 'colored'
-        });
+        let billingAddress;
+    
+        if (isAddress) {
+          billingAddress = {
+            first_name: first_name,
+            last_name: last_name,
+            address1: shippingAddress.address,
+            city: shippingAddress.city,
+            state: shippingAddress.state,
+            zip: shippingAddress.zipCode
+          };
+        } else {
+          billingAddress = {
+            first_name,
+            last_name,
+            address1,
+            city,
+            state,
+            zip
+          };
+        }
+    
+        const dp = new DirectPost(`${process.env.ALLAYPAY_API_KEY}`);
+        dp.setBilling(billingAddress);
+    
+        const response = dp.doSale(totalPrice, ccnumber, ccexp, cvv);
+        console.log("response", response);
+          const orderData = {
+            orderItems: cartItems,
+            shippingAddress,
+            itemsPrice,
+            shippingPrice,
+            taxPrice,
+            totalPrice,
+          };
+          
+          const orderResponse = await axios.post('/api/orders', orderData);
+          const orderId = orderResponse.data.orderId; // Extract orderId from the response
+  
+          let config = {
+            method: 'post',
+            url: `${process.env.NEXT_PUBLIC_API_URL}/api/receipt`,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            data: { orderId, orderData },
+          };
+      
+          await axios(config);
+
+          dispatch({ type: 'CART_CLEAR_ITEMS' });
+          Cookies.remove('cart');
+          router.push({
+            pathname: '/order-success',
+            query: { orderId },
+          });
+      } catch (error) {
+        toast.error("Unable to complete the transaction at this time.", { theme: 'colored' });
       }
     };
-
-    function createOrder(data, actions) {
-      return actions.order
-        .create({
-          purchase_units: [
-            {
-              amount: { value: totalPrice },
-            },
-          ],
-        })
-        .then((orderID) => {
-          return orderID;
-        });
-    }
-
-    function onApprove(data, actions) {
-      return actions.order.capture().then(async function (details) {
-        try {
-          orderDispatch({ type: 'PAY_REQUEST' });
     
-          // Use the order ID from PayPal details
-          // const orderId = details.id;
-    
-          // Update the local state to mark the order as paid
-          orderDispatch({ type: 'PAY_SUCCESS' });
-    
-          // Fetch the order details after payment
-          orderDispatch({ type: 'FETCH_REQUEST' });
-          const { data } = await axios.get(`/api/orders/${JSON.parse(JSON.stringify(order._id))}`, details);
-          orderDispatch({ type: 'FETCH_SUCCESS', payload: data });
-    
-          // Reset the order ID after payment
-          setOrderId(null);
-
-          toast.success('Order is paid successfully', {
-            theme: 'colored'
-          });
-        } catch (err) {
-          orderDispatch({ type: 'PAY_FAIL', payload: getError(err) });
-          toast.error(getError(err), {
-            theme: 'colored'
-          });
-        }
-      });
-    }
-
-  function onError(err) {
-    toast.error(getError(err), {
-      theme: 'colored'
-    });
-  }
 
   return (
     <Layout>
@@ -217,7 +181,7 @@ const PlaceOrder = () => {
           className="toast-alert"
         />
         <Container fluid className="pt-5">
-            <h1 className="text-center">Order Review</h1>
+            <h1 className="text-center">Order Review & Payment</h1>
           {loading ? (
               <div className="spinner-border customer-spinner text-primary" role="status">
                 <span className="visually-hidden">Loading...</span>
@@ -231,7 +195,7 @@ const PlaceOrder = () => {
                   <Card.Body>
                     <h2 className="card-title">Shipping Address</h2>
                     <p>
-                      <b>{shippingAddress.fullName}</b><br/>
+                      <b>{shippingAddress.firstName} {shippingAddress.lastName}</b><br/>
                       <b>{shippingAddress.phone}</b><br/>
                       <b>{shippingAddress.email}</b><br/>
                       {shippingAddress.address}<br/>
@@ -244,17 +208,6 @@ const PlaceOrder = () => {
                     </Link>
                   </Card.Body>
                 </Card>
-                <Card className="shadow mb-4">
-                    <Card.Body>
-                      <h2 className="card-title">Payment</h2>
-                        {isPaid ? (
-                            <span className="badge bg-success">Paid on {moment(new Date(paidAt)).format('MM/DD/YYYY')}</span>
-                        ) : (
-                            <span className="badge bg-danger">Not paid</span>
-                        )}
-                    </Card.Body>
-                  </Card>
-
                 <Card className="shadow card order-card">
                   <Card.Body className="card-body">
                     <h2 className="card-title">Order Items</h2>
@@ -272,7 +225,7 @@ const PlaceOrder = () => {
                       </thead>
                       <tbody>
                       {cartItems.map((item) => (
-                          <tr key={item._id}>
+                          <tr key={`${item._id}-${item.packSizeSelected}`}>
                           <td>
                           <Link href={`/product/${item.slug}`} passHref>
                             <Image src={item.imageOne} width={80} height={60} alt="..." />
@@ -280,7 +233,7 @@ const PlaceOrder = () => {
                           </td>
                           <td className="align-middle">{item.name}</td>
                           <td className="align-middle">{item.flavor}</td>
-                          <td className="align-middle">{item.sizeSelected}</td>
+                          <td className="align-middle">{item.packSizeSelected}</td>
                           <td className="align-middle">{item.quantity}</td>
                           <td className="align-middle">${item.price.toFixed(2)}</td>
                           <td className="align-middle">
@@ -294,44 +247,289 @@ const PlaceOrder = () => {
                 </Card>
               </Col>
               <Col lg={4}>
-                <Card className="shadow card">
-                  <Card.Body className="card-body">
-                      <h2 className="card-title">Order Summary</h2>
-                      <div className="summary d-flex justify-content-between">
-                          <h6>Items:</h6>
-                          <span>${itemsPrice.toFixed(2)}</span>
-                      </div>
-                      <div className=" summary d-flex justify-content-between">
-                          <h6>Tax:</h6>
-                          <span>${taxPrice.toFixed(2)}</span>
-                      </div>
-                      <div className=" summary d-flex justify-content-between">
-                          <h6>Shipping:</h6>
-                          <span>${shippingPrice.toFixed(2)}</span>
-                      </div>
-                      <div className="summary-total d-flex justify-content-between">
-                          <h5 className="fw-bold">Total:</h5>
-                          <span><h5 className="fw-bold">${totalPrice.toFixed(2)}</h5></span>
-                      </div>
-                    {!isPaid && (
-                        <div>
-                          {isPending ? (
-                            <div>Loading...</div>
-                          ) : (
-                            <div className="w-100">
-                              <PayPalButtons
-                                createOrder={createOrder}
-                                onApprove={onApprove}
-                                onError={onError}
-                                onClick={placeOrderHandler}
-                              ></PayPalButtons>
+                <Row>
+                  <Col>
+                    <Card className="shadow card">
+                      <Card.Body className="card-body">
+                        <h2 className="card-title">Order Summary</h2>
+                        <div className="summary d-flex justify-content-between">
+                            <h6>Items:</h6>
+                            <span>${itemsPrice.toFixed(2)}</span>
+                        </div>
+                        <div className=" summary d-flex justify-content-between">
+                            <h6>Tax:</h6>
+                            <span>${taxPrice.toFixed(2)}</span>
+                        </div>
+                        <div className=" summary d-flex justify-content-between">
+                            <h6>Shipping:</h6>
+                            <span>${shippingPrice.toFixed(2)}</span>
+                        </div>
+                        <div className="summary-total d-flex justify-content-between">
+                            <h5 className="fw-bold">Total:</h5>
+                            <span><h5 className="fw-bold">${totalPrice.toFixed(2)}</h5></span>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Card className="shadow card my-3">
+                      <Card.Header className="bg-white">
+                        <h2 className="card-title">Credit Card</h2>
+                        <div className="d-flex justify-content-between">
+                          <Image src="/images/icons/visa_icon.png" width={45} height={45} alt="..." />
+                          <Image src="/images/icons/mastercard_icon.png" width={45} height={45} alt="..." />
+                          <Image src="/images/icons/discover_icon.png" width={45} height={45} alt="..." />
+                          <Image src="/images/icons/amex_card_icon.png" className="mt-2" width={48} height={30} alt="..." />
+                        </div>
+                      </Card.Header>
+                      <Card.Body>
+                        <form onSubmit={handleSubmit(submitHandler)} className="col-lg-12 col-md-12 col-sm-12 form-shipment justify-content-center">
+                          <Row>
+                            <Col>
+                              <div className="form-floating">
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="ccnumber"
+                                  placeholder="Card Number" 
+                                  {...register('ccnumber', {
+                                    required: 'Please enter card number',
+                                  })}
+                                />
+                                {errors.ccnumber && (
+                                  <div className="invalid-feedback">
+                                    {errors.ccnumber.message}
+                                  </div>
+                                )}
+                                <label htmlFor="ccnumber">Card Number</label>
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col lg={6} md={12}>
+                              <div className="form-floating">
+                                <Controller 
+                                  name="ccexp"
+                                  control={control}
+                                  rules={{
+                                    required: true,
+                                    pattern: /\d{2}\/\d{2}/
+                                  }}
+                                  render={({ field: {onChange, ccexp, value} }) => (
+                                    <NumberFormat
+                                      format="##/##"
+                                      name={ccexp}
+                                      className={`form-control ${errors.ccexp ? 'is-invalid' : ''}`}
+                                      value={value}
+                                      id="ccexp" 
+                                      placeholder="Expn Date MMYY" 
+                                      onChange={onChange}
+                                    />
+                                  )}
+                                />
+                                <div className="invalid-feedback">
+                                    {errors.ccexp
+                                          ? errors.ccexp.type === 'pattern'
+                                            ? 'Expiration date is not completed'
+                                            : 'Expiration date is required'
+                                          : ''
+                                    }
+                                </div>
+                                <label htmlFor="floatingInput">Expn Date MMYY</label>
+                              </div>
+                            </Col>
+                            <Col lg={6} md={12}>
+                              <div className="form-floating">
+                                <Controller 
+                                  name="cvv"
+                                  control={control}
+                                  rules={{
+                                    required: true,
+                                    pattern: /\d{3}/
+                                    ,
+                                  }}
+                                  render={({ field: {onChange, cvv, value} }) => (
+                                    <NumberFormat
+                                      format="###"
+                                      name={cvv}
+                                      className={`form-control ${errors.cvv ? 'is-invalid' : ''}`}
+                                      value={value}
+                                      id="cvv" 
+                                      placeholder="CVV" 
+                                      onChange={onChange}
+                                    />
+                                  )}
+                                />
+                                <div className="invalid-feedback">
+                                    {errors.cvv
+                                          ? errors.cvv.type === 'pattern'
+                                            ? 'cvv is not completed'
+                                            : 'cvv is required'
+                                          : ''
+                                    }
+                                </div>
+                                <label htmlFor="cvv">CVV</label>
+                              </div>
+
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col>
+                              <div className="form-floating">
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="first_name"
+                                  placeholder="First Name" 
+                                  {...register('first_name', {
+                                    required: 'Please enter cardholder first name',
+                                  })}
+                                />
+                                {errors.first_name && (
+                                  <div className="invalid-feedback">
+                                    {errors.first_name.message}
+                                  </div>
+                                )}
+                                <label htmlFor="first_name">First Name</label>
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col>
+                              <div className="form-floating">
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="last_name"
+                                  placeholder="Last Name" 
+                                  {...register('last_name', {
+                                    required: 'Please enter cardholder last name',
+                                  })}
+                                />
+                                {errors.last_name && (
+                                  <div className="invalid-feedback">
+                                    {errors.last_name.message}
+                                  </div>
+                                )}
+                                <label htmlFor="last_name">Last Name</label>
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col>
+                              <div className="form-check">
+                                <input 
+                                  className="form-check-input" 
+                                  type="checkbox" 
+                                  name="isBillingAddress"
+                                  onChange={(e) => setIsAddress(e.target.checked)}
+                                  checked={isAddress}
+                                  id="isBillingAddress"
+                                />
+                                <label className="form-check-label" htmlFor="gridCheck">
+                                  Use shipping address as billing address
+                                </label>
+                              </div> 
+                            </Col>
+                          </Row>
+                          {!isAddress && (
+                            <div className="mt-3">
+                              <h5>Billing Address</h5>
+                              <Row>
+                                <Col>
+                                  <div className="form-floating">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="address1"
+                                      placeholder="Address" 
+                                      {...register('address1', {
+                                        required: 'Please enter cardholder last name',
+                                      })}
+                                    />
+                                    {errors.address1 && (
+                                      <div className="invalid-feedback">
+                                        {errors.address1.message}
+                                      </div>
+                                    )}
+                                    <label htmlFor="address1">Address</label>
+                                  </div>
+                                </Col>
+                              </Row>
+                              <Row>
+                                <Col>
+                                  <div className="form-floating">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="city"
+                                      placeholder="City" 
+                                      {...register('city', {
+                                        required: 'Please enter city',
+                                      })}
+                                    />
+                                    {errors.city && (
+                                      <div className="invalid-feedback">
+                                        {errors.city.message}
+                                      </div>
+                                    )}
+                                    <label htmlFor="city">City</label>
+                                  </div>
+                                </Col>
+                              </Row>
+                              <Row>
+                                <Col lg={6} md={12}>
+                                  <div className="form-floating">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="state"
+                                      placeholder="State" 
+                                      {...register('state', {
+                                        required: 'Please enter a state',
+                                      })}
+                                    />
+                                    {errors.state && (
+                                      <div className="invalid-feedback">
+                                        {errors.state.message}
+                                      </div>
+                                    )}
+                                    <label htmlFor="state">State</label>
+                                  </div>
+                                </Col>
+                                <Col lg={6} md={12}>
+                                  <div className="form-floating">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                      id="zip"
+                                      placeholder="Zip" 
+                                      {...register('zip', {
+                                        required: 'Please enter cvv number',
+                                      })}
+                                    />
+                                    {errors.zip && (
+                                      <div className="invalid-feedback">
+                                        {errors.zip.message}
+                                      </div>
+                                    )}
+                                    <label htmlFor="zip">Zip</label>
+                                  </div>
+                                </Col>
+                              </Row>
+
                             </div>
                           )}
-                          {loadingPay && <div>Loading...</div>}
-                        </div>
-                      )}
-                  </Card.Body>
-                </Card>
+                          <button className="w-100 btn btn-lg btn-primary my-4" type="submit">
+                            Submit Payment  
+                          </button>
+                        </form>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </Row>
               </Col>
             </Row>
           )}

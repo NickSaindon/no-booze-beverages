@@ -33,29 +33,41 @@ const data = {
         }
     ],
     categories: [
-        {
-            name: 'Kratom Soda',
-            slug: 'kratom-soda',
-            categoryImage: '/images/kratom-soda.jpg',
-            categoryText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
-        },
-        {
-            name: 'Teas & Coffee',
-            slug: 'teas-and-coffee',
-            categoryImage: '/images/do-raw-powder-bags.jpg',
-            categoryText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
-        }
+      {
+          name: 'Kranium Sodas',
+          slug: 'kranium-sodas',
+          categoryImage: '/images/kratom-soda.jpg',
+          categoryText: 'Indulge in the captivating fusion of flavor and wellness with our Kranium Sodas – a remarkable collection of sodas expertly crafted with various enticing flavors, each infused with the natural essence of Kratom. Discover a refreshing symphony of flavors that goes beyond ordinary sodas, embracing a unique harmony of taste and well-being in every sip.'
+      },
+      {
+          name: 'Kranium Teas & Coffee',
+          slug: 'kranium-teas-and-coffee',
+          categoryImage: '/images/category-header-image-size.jpg',
+          categoryText: 'Discover a world of sensory delight with our diverse range of Kratom-infused teas and coffee drinks, where the robust essence of Kratom seamlessly intertwines with an array of captivating flavors. From the bold and invigorating to the subtly sweet, elevate your beverage experience with our meticulously crafted selection that promises a harmonious balance of Kratoms botanical richness and a medley of delightful tastes.'
+      },
+      {
+        name: 'Krakava Sodas',
+        slug: 'krakava-sodas',
+        categoryImage: '/images/category-header-image-size.jpg',
+        categoryText: 'Embark on a refreshing journey with our unique collection of soda drinks infused with the natural benefits of Kratom and Kava. Sip your way to blissful relaxation as these effervescent beverages combine the invigorating qualities of Kratom with the soothing essence of Kava, offering a fizzy fusion of wellness and flavorful indulgence in every sip.'
+      },
+      {
+        name: 'Krakava Teas',
+        slug: 'krakava-teas',
+        categoryImage: '/images/category-header-image-size.jpg',
+        categoryText: 'Elevate your tea-drinking experience with our exquisite assortment of Kratom and Kava-infused blends, where the botanical richness of Kratom meets the calming properties of Kava in a symphony of delightful flavors. From invigorating citrus notes to soothing herbal infusions, our teas promise a harmonious fusion that transforms your tea ritual into a serene and aromatic escape.'
+      }
     ],
     products: [
         {
-            name: 'Kratom Soda',
+            name: 'Kranium Soda',
             flavor: 'Sour Apple',
-            slug: 'sour-apple-kratom-soda-12oz-6pack',
-            category: 'kratom-soda',
-            imageOne: '/images/sour-apple-soda.jpg',
-            imageTwo: '/images/sour-apple-soda-6-pack.jpg',
-            imageThree: '/images/sour-apple-soda.jpg',
-            imageFour: '/images/sour-apple-soda-6-pack.jpg',
+            slug: 'sour-apple-kranium-soda-12oz',
+            category: 'kranium-sodas',
+            imageOne: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1709306093/aywuvfreexlr952zjuyr.jpg',
+            imageTwo: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1709793644/e640zwvovowjg9ngmnue.jpg',
+            imageThree: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1709306093/aywuvfreexlr952zjuyr.jpg',
+            imageFour: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1709793644/e640zwvovowjg9ngmnue.jpg',
             size: '12oz',
             color: '',
             priceSizes: [
@@ -87,20 +99,19 @@ const data = {
               ],
             rating: 4.5,
             numReviews: 8,
-            countInStock: 20,
             description: "Step into a world of tantalizing taste with No Booze Beverages Sour Apple Kratom Soda, a sensational blend of crisp apple flavor and the natural benefits of high-quality kratom. Elevating your beverage experience, this soda delivers a bold and refreshing profile that seamlessly marries the tartness of sour apples with the distinctive earthy notes of kratom. Crafted with precision and care, each bottle of Sour Apple Kratom Soda is a testament to the commitment to quality upheld by No Booze Beverages. The infusion of premium-grade kratom, sourced from the finest leaves of the Mitragyna speciosa plant, guarantees a clean and authentic product that caters to both flavor enthusiasts and wellness seekers. This unique soda not only captivates your taste buds with its vibrant apple tang but also introduces you to the potential benefits associated with kratom, such as a boost in energy, improved mood, and a heightened sense of relaxation. Whether you're in search of a non-alcoholic alternative that stands out or a flavorful beverage that combines indulgence with well-being, No Booze Beverages' Sour Apple Kratom Soda is the perfect choice. Indulge in the perfect balance of sweetness and tartness, and experience a new dimension in beverage enjoyment with every effervescent sip.",
             featuredImage: '/images/header-apple.jpg',
             featured: false
         },
         {
-            name: 'Kratom Soda',
+            name: 'Kranium Soda',
             flavor: 'Creamy Peach',
-            slug: 'peachy-cream-kratom-soda-12oz-6pack',
-            category: 'kratom-soda',
-            imageOne: '/images/creamy-peach-soda.jpg',
-            imageTwo: '/images/creamy-peach-soda-6-pack.jpg',
-            imageThree: '/images/creamy-peach-soda.jpg',
-            imageFour: '/images/creamy-peach-soda-6-pack.jpg',
+            slug: 'creamy-peach-kranium-soda-12oz',
+            category: 'kranium-sodas',
+            imageOne: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357255/uy7fk19wizde962wuvfx.jpg',
+            imageTwo: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357281/jnph54szz1wms9ws7q20.jpg',
+            imageThree: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357255/uy7fk19wizde962wuvfx.jpg',
+            imageFour: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357281/jnph54szz1wms9ws7q20.jpg',
             size: '12oz',
             color: '',
             priceSizes: [
@@ -132,20 +143,19 @@ const data = {
               ],
             rating: 4.5,
             numReviews: 8,
-            countInStock: 20,
             description: "Introducing No Booze Beverages Creamy Peach Kratom Soda, a luscious fusion of velvety peach goodness and the natural benefits of premium-grade kratom. Crafted with meticulous attention to detail, this unique soda offers an exquisite balance between the rich creaminess of peaches and the subtle earthy tones of kratom, resulting in a beverage that delights the palate and nurtures the body. Immerse yourself in the velvety sweetness of ripe peaches with every sip, as the smooth creaminess enhances the overall indulgence of this soda experience. No Booze Beverages takes pride in sourcing only the finest kratom leaves from the Mitragyna speciosa plant, ensuring a product of unmatched quality and authenticity. Beyond its delectable taste, Creamy Peach Kratom Soda also presents the potential benefits associated with kratom, including a gentle energy boost, mood enhancement, and a calming influence. Whether you're seeking a flavorful alternative to traditional sodas or a beverage that harmoniously combines taste and well-being, No Booze Beverages Creamy Peach Kratom Soda is the ideal choice. Indulge in the sumptuous marriage of creamy peach perfection and natural goodness, as you sip your way to a new level of refreshment and satisfaction.",
             featuredImage: '/images/header-peach-cream.jpg',
             featured: false
         },
         {
-            name: 'Kratom Soda',
+            name: 'Kranium Soda',
             flavor: 'Cherry Pop',
-            slug: 'cherry-pop-kratom-soda-12oz-6pack',
-            category: 'kratom-soda',
-            imageOne: '/images/cherry-pop-soda.jpg',
-            imageTwo: '/images/cherry-pop-soda-6-pack.jpg',
-            imageThree: '/images/cherry-pop-soda.jpg',
-            imageFour: '/images/cherry-pop-soda-6-pack.jpg',
+            slug: 'cherry-pop-kranium-soda-12oz',
+            category: 'kranium-sodas',
+            imageOne: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357368/v13o4yxxjajwnsxb8rl8.jpg',
+            imageTwo: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357396/ecbswhgamhs15osjknax.jpg',
+            imageThree: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357368/v13o4yxxjajwnsxb8rl8.jpg',
+            imageFour: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357396/ecbswhgamhs15osjknax.jpg',
             size: '12oz',
             color: '',
             priceSizes: [
@@ -177,47 +187,46 @@ const data = {
               ],
             rating: 4.5,
             numReviews: 8,
-            countInStock: 20,
             description: "Introducing No Booze Beverages Cherry Pop Kratom Soda, a refreshing and unique beverage that combines the bold and fruity flavor of cherries with the natural benefits of premium-grade kratom. This one-of-a-kind soda offers a delightful alternative for those seeking a non-alcoholic and all-natural beverage with a twist. Crafted with care, each bottle of Cherry Pop Kratom Soda contains the perfect blend of cherry essence and the distinctive taste of kratom, resulting in a harmonious fusion of flavors that tantalize the taste buds. The infusion of kratom, derived from the Mitragyna speciosa plant, brings a subtle earthy undertone that complements the sweetness of the cherries, creating a beverage that is both invigorating and satisfying. No Booze Beverages prioritizes quality and purity, sourcing only the finest kratom leaves to ensure a clean and authentic product. Beyond its delicious taste, this soda also offers the potential benefits associated with kratom, such as increased energy, enhanced mood, and a sense of relaxation. Whether you're looking for a flavorful and health-conscious beverage for everyday enjoyment or a unique alternative to traditional sodas, Cherry Pop Kratom Soda from No Booze Beverages is the perfect choice. Embrace the fusion of flavor and wellness with every sip of this thoughtfully crafted beverage.",
             featuredImage: '/images/header-cherries.jpg',
             featured: false
         },
         {
-            name: 'Kratom Soda',
+            name: 'Kranium Soda',
             flavor: 'Sunshine',
-            slug: 'sunshine-kratom-soda-12oz-6pack',
-            category: 'kratom-soda',
-            imageOne: '/images/sunshine-soda.jpg',
-            imageTwo: '/images/sunshine-soda-6-pack.jpg',
-            imageThree: '/images/sunshine-soda.jpg',
-            imageFour: '/images/sunshine-soda-6-pack.jpg',
+            slug: 'sunshine-kratom-soda-12oz',
+            category: 'kranium-soda',
+            imageOne: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357473/zgdgfpopwgj6boyuprkh.jpg',
+            imageTwo: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357494/vlqgf2fqeoqometuphpx.jpg',
+            imageThree: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357473/zgdgfpopwgj6boyuprkh.jpg',
+            imageFour: 'https://res.cloudinary.com/dh8a3rrtq/image/upload/v1710357494/vlqgf2fqeoqometuphpx.jpg',
             size: '12oz',
             color: '',
             priceSizes: [
                 {
                   packSize: '4 Pack',
                   price: 24.00,
-                  countInStock: 10,
+                  countInStock: 0,
                 },
                 {
                   packSize: '6 Pack',
                   price: 36.00,
-                  countInStock: 15,
+                  countInStock: 0,
                 },
                 {
                   packSize: '8 Pack',
                   price: 48.00,
-                  countInStock: 20,
+                  countInStock: 0,
                 },
                 {
                   packSize: '12 Pack',
                   price: 72.00,
-                  countInStock: 5,
+                  countInStock: 0,
                 },
                 {
                   packSize: '24 Pack',
                   price: 144.00,
-                  countInStock: 10,
+                  countInStock: 0,
                 }
               ],
             rating: 4.5,
@@ -225,7 +234,579 @@ const data = {
             description: "Step into a world of radiant flavor with No Booze Beverages Sunshine Kratom Soda, a bright and invigorating concoction that blends the uplifting essence of citrus with the natural benefits of premium-grade kratom. Crafted with precision and a commitment to excellence, this unique soda promises a burst of sunshine in every sip. Immerse yourself in the zesty fusion of citrus notes, as the refreshing tang of oranges and lemons harmonizes with the distinct earthy undertones of kratom. No Booze Beverages takes pride in sourcing the finest kratom leaves from the Mitragyna speciosa plant, ensuring a beverage that not only tantalizes the taste buds but also offers potential wellness benefits. Embrace the uplifting energy, improved mood, and a sense of relaxation that Sunshine Kratom Soda can provide. This non-alcoholic alternative is perfect for those seeking a delightful and health-conscious beverage that stands out from the crowd. Whether you're unwinding on a sunny day or looking for a pick-me-up during a busy afternoon, Sunshine Kratom Soda from No Booze Beverages is the ideal companion for those who crave the perfect balance of refreshment and natural goodness. Allow the radiance of Sunshine Kratom Soda to brighten your beverage experience and elevate your enjoyment to new heights.",
             featuredImage: '/images/header-cherries.jpg',
             featured: false
-        }
+        },
+        {
+          name: 'Kranium Frappe',
+          flavor: 'Horchata',
+          slug: 'kranium-frappe-horchata',
+          category: 'kranium-teas-and-coffee',
+          imageOne: '/images/product-image-size.jpg',
+          imageTwo: '/images/product-image-size.jpg',
+          imageThree: '/images/product-image-size.jpg',
+          imageFour: '/images/product-image-size.jpg',
+          size: '12oz',
+          color: '',
+          priceSizes: [
+              {
+                packSize: '4 Pack',
+                price: 24.00,
+                countInStock: 0,
+              },
+              {
+                packSize: '6 Pack',
+                price: 36.00,
+                countInStock: 0,
+              },
+              {
+                packSize: '8 Pack',
+                price: 48.00,
+                countInStock: 0,
+              },
+              {
+                packSize: '12 Pack',
+                price: 72.00,
+                countInStock: 0,
+              },
+              {
+                packSize: '24 Pack',
+                price: 144.00,
+                countInStock: 0,
+              }
+            ],
+          rating: 4.5,
+          numReviews: 8,
+          description: "Must add a product description here.",
+          featuredImage: '/images/featured-image-size.jpg',
+          featured: false
+      },
+      {
+        name: 'Kranium Frappe',
+        flavor: 'Black and Brown',
+        slug: 'kranium-frappe-black-and-brown',
+        category: 'kranium-teas-and-coffee',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Kranium Tea',
+        flavor: 'CranApple',
+        slug: 'kranium-cranapple-tea',
+        category: 'kranium-teas-and-coffee',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Kranium Tea',
+        flavor: 'Tropical',
+        slug: 'kranium-tropical-tea',
+        category: 'kranium-teas-and-coffee',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Kranium Tea',
+        flavor: 'Black Lemon',
+        slug: 'kranium-black-lemon-tea',
+        category: 'kranium-teas-and-coffee',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Kranium Tea',
+        flavor: 'Peach',
+        slug: 'kranium-peach-tea',
+        category: 'kranium-teas-and-coffee',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 10,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Krakava Soda',
+        flavor: 'Citrus Ginger',
+        slug: 'krakava-soda-citrus-ginger',
+        category: 'krakava-sodas',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Krakava Soda',
+        flavor: 'Purple Drink',
+        slug: 'krakava-soda-purple-drink',
+        category: 'krakava-sodas',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Krakava Tea',
+        flavor: 'Cran Apple',
+        slug: 'krakava-cranapple-tea',
+        category: 'krakava-teas',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Krakava Tea',
+        flavor: 'Tropical',
+        slug: 'krakava-tropical-tea',
+        category: 'krakava-teas',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Krakava Tea',
+        flavor: 'Black Lemon',
+        slug: 'krakava-black-lemon-tea',
+        category: 'krakava-teas',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Krakava Tea',
+        flavor: 'Black Lemon',
+        slug: 'krakava-black-lemon-tea',
+        category: 'krakava-teas',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      },
+      {
+        name: 'Krakava Tea',
+        flavor: 'Peach',
+        slug: 'krakava-peach-tea',
+        category: 'krakava-teas',
+        imageOne: '/images/product-image-size.jpg',
+        imageTwo: '/images/product-image-size.jpg',
+        imageThree: '/images/product-image-size.jpg',
+        imageFour: '/images/product-image-size.jpg',
+        size: '12oz',
+        color: '',
+        priceSizes: [
+            {
+              packSize: '4 Pack',
+              price: 24.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '6 Pack',
+              price: 36.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '8 Pack',
+              price: 48.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '12 Pack',
+              price: 72.00,
+              countInStock: 0,
+            },
+            {
+              packSize: '24 Pack',
+              price: 144.00,
+              countInStock: 0,
+            }
+          ],
+        rating: 4.5,
+        numReviews: 8,
+        description: "Must add a product description here.",
+        featuredImage: '/images/featured-image-size.jpg',
+        featured: false
+      }
     ],
     blogs: [
         {

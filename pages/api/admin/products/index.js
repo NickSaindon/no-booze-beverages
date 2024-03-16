@@ -31,14 +31,29 @@ const postHandler = async (req, res) => {
     color: '',
     priceSizes: [
       {
+        packSize: '4 Pack',
+        price: 24.00,
+        countInStock: 0,
+      },
+      {
         packSize: '6 Pack',
-        price: 34.95,
-        countInStock: 25,
+        price: 36.00,
+        countInStock: 0,
+      },
+      {
+        packSize: '8 Pack',
+        price: 48.00,
+        countInStock: 0,
+      },
+      {
+        packSize: '12 Pack',
+        price: 72.00,
+        countInStock: 0,
       },
       {
         packSize: '24 Pack',
-        price: 65.95,
-        countInStock: 12,
+        price: 144.00,
+        countInStock: 0,
       },
     ],
     rating: 0,

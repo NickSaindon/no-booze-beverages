@@ -26,7 +26,8 @@ const Shipping = () => {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    setValue('fullName', shippingAddress.fullName);
+    setValue('firstName', shippingAddress.firstName);
+    setValue('lastName', shippingAddress.lastName);
     setValue('email', shippingAddress.email);
     setValue('phone', shippingAddress.phone)
     setValue('address', shippingAddress.address);
@@ -35,10 +36,10 @@ const Shipping = () => {
     setValue('zipCode', shippingAddress.zipCode);
   }, [setValue, shippingAddress]);
     
-    const submitHandler = ({ fullName, email, phone, address, city, state, zipCode }) => {
+    const submitHandler = ({ firstName, lastName, email, phone, address, city, state, zipCode }) => {
       dispatch({
         type: 'SAVE_SHIPPING_ADDRESS',
-        payload: { fullName, email, phone, address, city, state, zipCode },
+        payload: { firstName, lastName, email, phone, address, city, state, zipCode },
       });
 
       Cookies.set(
@@ -46,7 +47,8 @@ const Shipping = () => {
         JSON.stringify({
           ...cart,
           shippingAddress: {
-            fullName,
+            firstName,
+            lastName,
             email,
             phone,
             address,
@@ -111,7 +113,7 @@ const Shipping = () => {
 
                 <div className="form-floating text-center">
                   <Controller
-                    name="fullName"
+                    name="firstName"
                     control={control}
                     defaultValue=""
                     rules={{
@@ -121,24 +123,56 @@ const Shipping = () => {
                     render={({ field }) => (
                       <input 
                         type="text" 
-                        className={`form-control ${errors.fullName ? 'is-invalid' : ''}`}
-                        id="fullName" 
-                        placeholder="Full Name" 
+                        className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
+                        id="firstName" 
+                        placeholder="First Name" 
                         {...field}
                       />
                     )}
                   />
                   <div className="invalid-feedback">
                     {
-                      errors.fullName
-                        ? errors.fullName.type === 'minLength'
-                        ? 'Full Name length is more than 1'
-                      : 'Full Name is required'
+                      errors.firstName
+                        ? errors.firstName.type === 'minLength'
+                        ? 'First Name length is more than 2'
+                      : 'First Name is required'
                       : ''
                     }
                   </div>
-                  <label htmlFor="name">Full Name</label>
+                  <label htmlFor="firstName">First Name</label>
                 </div>
+
+                <div className="form-floating text-center">
+                  <Controller
+                    name="lastName"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: true,
+                      minLength: 2,
+                    }}
+                    render={({ field }) => (
+                      <input 
+                        type="text" 
+                        className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
+                        id="lastName" 
+                        placeholder="Last Name" 
+                        {...field}
+                      />
+                    )}
+                  />
+                  <div className="invalid-feedback">
+                    {
+                      errors.lastName
+                        ? errors.lastName.type === 'minLength'
+                        ? 'Last Name length is more than 2'
+                      : 'Last Name is required'
+                      : ''
+                    }
+                  </div>
+                  <label htmlFor="lastName">Last Name</label>
+                </div>
+
                 <div className="form-floating">
                 <Controller 
                   name="phone"

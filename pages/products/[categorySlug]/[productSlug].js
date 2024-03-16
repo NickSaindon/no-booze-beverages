@@ -21,26 +21,26 @@ const ProductDetails = (props) => {
   }
 
   const addToCartHandler = async () => {
-    const selectedSize = product.priceSizes.find((sizeSelected) => sizeSelected.packSize === selectedPackSize);
+    const selectedSize = product.priceSizes.find((packSizeSelected) => packSizeSelected.packSize === selectedPackSize);
     const existItem = state.cart.cartItems.find(
-      (x) => x.slug === product.slug && x.sizeSelected === selectedSize.packSize
+      (x) => x.slug === product.slug && x.packSizeSelected === selectedSize.packSize
     );
-    const quantity = existItem ? existItem.quantity + 1 : 1;
-
-    if (selectedSize.countInStock < quantity) {
+  
+    // Check if the quantity exceeds the available stock
+    if (selectedSize.countInStock < 1) {
       return toast.error('Sorry, this product is out of stock', {
         theme: 'colored',
       });
     }
-
+  
     dispatch({
       type: 'CART_ADD_ITEM',
-      payload: { ...product, quantity, sizeSelected: selectedSize.packSize, price: selectedSize.price },
+      payload: { ...product, quantity: 1, packSizeSelected: selectedSize.packSize, price: selectedSize.price },
     });
-
+  
     toast.success('Product Added to Cart', {
-        theme: 'colored',
-    })
+      theme: 'colored',
+    });
   };
 
   const handlePackSizeChange = (e) => {
@@ -141,9 +141,9 @@ const ProductDetails = (props) => {
                                 value={selectedPackSize}
                                 onChange={handlePackSizeChange}
                               >
-                                {product.priceSizes.map((sizeSelected) => (
-                                  <option key={sizeSelected.packSize} value={sizeSelected.packSize}>
-                                    {sizeSelected.packSize}
+                                {product.priceSizes.map((packSizeSelected) => (
+                                  <option key={packSizeSelected.packSize} value={packSizeSelected.packSize}>
+                                    {packSizeSelected.packSize}
                                   </option>
                                 ))}
                               </select>
@@ -154,11 +154,11 @@ const ProductDetails = (props) => {
                             <h6><b>Status:</b></h6>
                           </Col>
                           <Col md={6} className="text-end">
-                            <h5>${selectedPackSize ? product.priceSizes.find((sizeSelected) => sizeSelected.packSize === selectedPackSize).price.toFixed(2) : ''}</h5>
-                            <div className={`stock-count fw-bold ${product.priceSizes.find((sizeSelected) => sizeSelected.packSize === selectedPackSize).countInStock > 0 ? 'text-primary' : 'text-danger'}`}>
-                                <span><div className={`${product.priceSizes.find((sizeSelected) => sizeSelected.packSize === selectedPackSize).countInStock > 0 ? 'pulsating-circle-green' : 'pulsating-circle-red'}`}></div>                               
+                            <h5>${selectedPackSize ? product.priceSizes.find((packSizeSelected) => packSizeSelected.packSize === selectedPackSize).price.toFixed(2) : ''}</h5>
+                            <div className={`stock-count fw-bold ${product.priceSizes.find((packSizeSelected) => packSizeSelected.packSize === selectedPackSize).countInStock > 0 ? 'text-primary' : 'text-danger'}`}>
+                                <span><div className={`${product.priceSizes.find((packSizeSelected) => packSizeSelected.packSize === selectedPackSize).countInStock > 0 ? 'pulsating-circle-green' : 'pulsating-circle-red'}`}></div>                               
 
-                                {selectedPackSize ? product.priceSizes.find((sizeSelected) => sizeSelected.packSize === selectedPackSize).countInStock > 0 ? 'In Stock' : 'Out of Stock' : ''}
+                                {selectedPackSize ? product.priceSizes.find((packSizeSelected) => packSizeSelected.packSize === selectedPackSize).countInStock > 0 ? 'In Stock' : 'Out of Stock' : ''}
                                 </span>
                             </div>
                           </Col>

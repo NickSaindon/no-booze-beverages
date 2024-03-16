@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import { useEffect, useReducer } from 'react';
 import { getError } from '../../utils/error';
+import moment from 'moment';
 
 function reducer(state, action) {
     switch (action.type) {
@@ -80,21 +81,20 @@ const AdminOrders = () => {
                             <tr key={order._id} className="border-b">
                               <td className="p-2 text-center align-middle">{order._id.substring(20, 24)}</td>
                               <td className="p-2 text-center align-middle">
-                                {order.user ? order.user.name : order.shippingAddress.fullName}
-                                {console.log(order)}
+                                {order.user ? order.user.name : order.shippingAddress.firstName + ' ' + order.shippingAddress.lastName}
                               </td>
                               <td className="p-2 text-center align-middle">
-                                {order.createdAt.substring(0, 10)}
+                                {moment(new Date(order.createdAt)).format('MM/DD/YYYY')}
                               </td>
                               <td className="p-2 text-center align-middle">${order.totalPrice.toFixed(2)}</td>
                               <td className="p-2 text-center align-middle">
                                 {order.isPaid
-                                ? `${order.paidAt.substring(0, 10)}`
+                                ? `${moment(new Date(order.paidAt)).format('MM/DD/YYYY')}`
                                 : 'not paid'}
                               </td>
                               <td className="p-2 text-center align-middle">
                                 {order.isDelivered
-                                ? `${order.deliveredAt.substring(0, 10)}`
+                                ? `${moment(new Date(order.deliveredAt)).format('MM/DD/YYYY')}`
                                 : 'not delivered'}
                               </td>
                               <td className="p-2 text-center align-middle">

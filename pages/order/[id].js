@@ -50,7 +50,6 @@ function reducer(state, action) {
 const OrderScreen = () => {
     const { data: session } = useSession();
     // order/:id
-    const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   
     const { query } = useRouter();
     const orderId = query.id;
@@ -61,7 +60,6 @@ const OrderScreen = () => {
       error,
       order,
       successPay,
-      loadingPay,
       loadingDeliver,
       successDeliver,
     },
@@ -84,7 +82,6 @@ const OrderScreen = () => {
         };
         if (
           !order._id ||
-          successPay ||
           successDeliver ||
           (order._id && order._id !== orderId)
         ) {
@@ -95,21 +92,8 @@ const OrderScreen = () => {
           if (successDeliver) {
             dispatch({ type: 'DELIVER_RESET' });
           }
-        } else {
-          const loadPaypalScript = async () => {
-            const { data: clientId } = await axios.get('/api/keys/paypal');
-            paypalDispatch({
-              type: 'resetOptions',
-              value: {
-                'client-id': clientId,
-                currency: 'USD',
-              },
-            });
-            paypalDispatch({ type: 'setLoadingStatus', value: 'pending' });
-          };
-          loadPaypalScript();
         }
-      }, [order, orderId, paypalDispatch, successDeliver, successPay]);
+      }, [order, orderId, successDeliver]);
 
       const {
         shippingAddress,
@@ -219,8 +203,9 @@ const OrderScreen = () => {
                     <Card.Body>
                       <h2 className="card-title">Shipping Address</h2>
                       <p>
-                        <b>{shippingAddress.fullName}</b><br/>
+                        <b>{shippingAddress.firstName} {shippingAddress.lastName}</b><br/>
                         <b>{shippingAddress.phone}</b><br/>
+                        <b>{shippingAddress.email}</b><br/>
                         {shippingAddress.address}<br/>
                         {shippingAddress.city},{' '}
                         {shippingAddress.state},{' '}
@@ -259,7 +244,7 @@ const OrderScreen = () => {
                         </thead>
                         <tbody>
                           {orderItems.map((item) => (
-                            <tr key={item._id}>
+                            <tr key={`${item._id}-${item.packSizeSelected}`}>
                               <td>
                                 <Link href={`/product/${item.slug}`}>
                                     <Image src={item.imageOne} width={80} height={60} alt={`Image of ${item.name} ${item.size}`} />
@@ -299,22 +284,6 @@ const OrderScreen = () => {
                         <h5 className="fw-bold">Total:</h5>
                         <span><h5 className="fw-bold">${totalPrice.toFixed(2)}</h5></span>
                       </div>
-                      {!isPaid && (
-                        <div>
-                          {isPending ? (
-                            <div>Loading...</div>
-                          ) : (
-                            <div className="w-100">
-                              <PayPalButtons
-                                createOrder={createOrder}
-                                onApprove={onApprove}
-                                onError={onError}
-                              ></PayPalButtons>
-                            </div>
-                          )}
-                          {loadingPay && <div>Loading...</div>}
-                        </div>
-                      )}
                       {session.user.isAdmin && order.isPaid && !order.isDelivered && (
                         <div>
                           <button 

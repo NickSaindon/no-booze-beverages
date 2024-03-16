@@ -7,7 +7,6 @@ import { StoreProvider } from '@/utils/Store';
 import PageTransitions from '../components/PageTransitions';
 import { useRouter } from 'next/router';
 import Spinner from 'react-bootstrap/Spinner';
-import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { SessionProvider, useSession } from 'next-auth/react';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
@@ -21,7 +20,6 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
     <SessionProvider session={session}>
       <StoreProvider>
         <PageTransitions route={router.asPath}>
-        <PayPalScriptProvider deferLoading={true}>
           {Component.auth ? (
             <Auth 
               adminOnly={Component.auth.adminOnly} 
@@ -32,7 +30,6 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
             ) : (
               <Component {...pageProps} />
             )}
-          </PayPalScriptProvider>
         </PageTransitions>
       </StoreProvider>
     </SessionProvider>
