@@ -8,9 +8,12 @@ import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import FeaturedProduct from '@/components/FeaturedProduct';
+import AgeVerification  from '@/components/AgeVerification';
+import Cookies from 'js-cookie';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     gsap.timeline()
@@ -64,6 +67,8 @@ export default function Home() {
         scrub: true
       }, 
     });
+
+    Cookies.get('isVerified') ? JSON.parse(Cookies.get('isVerified')) : setOpenModal(true);
   }, []);
 
   const featured = [
@@ -71,10 +76,20 @@ export default function Home() {
     { _id: 2, text: "def" }
   ];
 
+  const handleIsVerified = () => {
+    setOpenModal(false);
+    Cookies.set('isVerified', true)
+  }
+
   return (
     <Layout 
       title="No Booze Beverages | Home" 
       description="No Booze Beverages is an online and retail seller of quality Thai botanicals.">
+      <AgeVerification 
+        open={openModal}
+        onClose={handleIsVerified}
+      >
+      </AgeVerification>
       <div id="page" className="home-container page-contain">
         <div className="home-header">
           <Container className="py-5">
@@ -125,10 +140,9 @@ export default function Home() {
               <Col sm={12} md={12} lg={6} className="py-5 m-auto">
                 <h1 className="text-primary text-center fw-bold">Our Journey</h1>
                 <p className="lead">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
-                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate 
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim 
-                  id est laborum.                
+                  As a passionate explorer, we have traversed the world, seeking out the highest quality elements that form the 
+                  heart of our beverages.  Step into a world of tantalizing taste with No Booze Beverages and elevate your beverage experience.
+                  Whether you're seeking a flavorful alternative to traditional sodas or a beverage that harmoniously combines taste and well-being, No Booze Beverages is the ideal choice.                
                 </p>
               </Col>
             </Row>

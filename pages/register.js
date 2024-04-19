@@ -70,7 +70,7 @@ const Register = () => {
           hideProgressBar={true}
           className="toast-alert"
         />
-        <main className="form-conatiner">
+        <main className="form-conatiner px-3">
           <div className="row justify-content-md-center">
             <form onSubmit={handleSubmit(submitHandler)} className="col-lg-4 col-md-12 col-sm-12">
               <Image src="/images/no-booze-logo.png" className="my-5" width={150} height={150} alt=""/>
@@ -191,7 +191,7 @@ const Register = () => {
               <button className="w-100 btn btn-lg btn-outline-primary light" type="submit">
                 Register
               </button>
-              <p className="mt-5 mb-3 text-white">
+              <p className="mt-5 mb-3 text-black">
                 Already have an account? &nbsp;
                 <Link href={`/login?redirect=${redirect || '/'}`} legacyBehavior>
                   <a>Login</a>

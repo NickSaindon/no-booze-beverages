@@ -46,6 +46,35 @@ a {
   }
 }
 
+// Age Verification Modal
+.overlay {
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3000;
+  .modal-container {
+    max-width: 600px;
+    width: 100%;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    display: flex;
+    border-radius: 2%;
+    box-shadow: 0px 0px 18px 0px rgba(0, 0, 0 , 0.75);
+    animation: fadeIn 1.5s;
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 // Page Transitions
 .no-booze-logo {
   position: absolute;
@@ -764,6 +793,12 @@ a {
 
 // Mobile Styles
 @media (max-width: 579px) {
+  .overlay {
+    .modal-container {
+      width: 90%;
+    }
+  }
+
   .form-row {
     margin: 0 20px;
   }
@@ -881,8 +916,8 @@ a {
     .about-header {
       height: 90vh;
       h1 {
-        padding-top: 150px;
-        font-size: 75px;
+        padding-top: 170px;
+        font-size: 64px;
       }
     }
     .about-row {
@@ -913,6 +948,36 @@ a {
         bottom: 25%;
         margin: 0 auto;
         text-align: center;
+      }
+    }
+  }
+
+  // Wholesale Inquiries Page
+  .wholesale-container {
+    margin: 75px 0 0 0;
+    padding-bottom: 60px;
+    .wholesale-header {
+      h1 {
+        font-size: 64px;
+        padding-top: 150px;
+      }
+    }
+  }
+
+  // Contact Page
+  .contact-container {
+    margin: 75px 0 0 0;
+    padding-bottom: 75px;
+    .contact-header {
+      width: 100%;
+      height: 500px;
+      background:url('/images/contact-header.jpg') center no-repeat transparent;
+      background-size: cover;
+      h1 {
+        font-size: 60px;
+        text-align: center;
+        color: white;
+        padding-top: 150px;
       }
     }
   }

@@ -33,7 +33,7 @@ const FeaturedProduct = () => {
     <h2>
       Checkout<br/>Sour Apple
     </h2>
-    <Link href="/products/kratom-soda/sour-apple-12oz">
+    <Link href="/products/kranium-sodas/sour-apple-kranium-soda-12oz">
       <Button variant="primary" size="lg">Details</Button>
     </Link>
   </div> 
@@ -41,7 +41,7 @@ const FeaturedProduct = () => {
     <h2>
       Checkout<br/>Creamy Peach
     </h2>
-    <Link href="/products/kratom-soda/creamy-peach-12oz">
+    <Link href="/products/kranium-sodas/creamy-peach-kranium-soda-12oz">
       <Button variant="primary" size="lg">Details</Button>
     </Link>
   </div>   
@@ -49,7 +49,7 @@ const FeaturedProduct = () => {
     <h2>
       Checkout<br/>Cherry Pop
     </h2>
-    <Link href="/products/kratom-soda/cherry-pop-12oz">
+    <Link href="/products/kranium-sodas/cherry-pop-kranium-soda-12oz">
       <Button variant="primary" size="lg">Details</Button>
     </Link>
   </div>  

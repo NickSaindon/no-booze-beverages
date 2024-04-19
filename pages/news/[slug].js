@@ -13,7 +13,7 @@ const NewsPost = (props) => {
       title={news.title}
       description={news.description}
     >
-      <div className="blog-post-container bg-white">
+      <div className="blog-post-container page-contain bg-white">
         <div className="container">
           <div className="row">
             <Link href='/news'>

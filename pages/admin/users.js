@@ -109,7 +109,6 @@ const AdminUsers = () => {
                                 <th className="p-3 text-center text-primary">EMAIL</th>
                                 <th className="p-3 text-center text-primary">ADMIN</th>
                                 <th className="p-3 text-center text-primary">VENDOR</th>
-                                <th className="p-3 text-center text-primary">MANUFACTURER</th>
                                 <th className="p-3 text-center text-primary">ACTIONS</th>
                               </tr>
                             </thead>
@@ -121,7 +120,6 @@ const AdminUsers = () => {
                                   <td className="p-2 text-center align-middle">{user.email}</td>
                                   <td className="p-2 text-center align-middle">{user.isAdmin ? 'YES' : 'NO'}</td>
                                   <td className="p-2 text-center align-middle">{user.isVendor ? 'YES' : 'NO'}</td>
-                                  <td className="p-2 text-center align-middle">{user.isManufacturer ? 'YES' : 'NO'}</td>
                                   <td className="p-2 text-center align-middle">
                                     <Link
                                       href={`/admin/user/${user._id}`}
@@ -156,7 +154,6 @@ const AdminUsers = () => {
                                 <th className="p-3 text-center text-primary">EMAIL</th>
                                 <th className="p-3 text-center text-primary">ADMIN</th>
                                 <th className="p-3 text-center text-primary">VENDOR</th>
-                                <th className="p-3 text-center text-primary">MANUFACTURER</th>
                                 <th className="p-3 text-center text-primary">ACTIONS</th>
                               </tr>
                             </thead>
@@ -168,7 +165,6 @@ const AdminUsers = () => {
                                   <td className="p-2 text-center align-middle">{user.email}</td>
                                   <td className="p-2 text-center align-middle">{user.isAdmin ? 'YES' : 'NO'}</td>
                                   <td className="p-2 text-center align-middle">{user.isVendor ? 'YES' : 'NO'}</td>
-                                  <td className="p-2 text-center align-middle">{user.isManufacturer ? 'YES' : 'NO'}</td>
                                   <td className="p-2 text-center align-middle">
                                     <Link
                                       href={`/admin/user/${user._id}`}
@@ -203,7 +199,6 @@ const AdminUsers = () => {
                                 <th className="p-3 text-center text-primary">EMAIL</th>
                                 <th className="p-3 text-center text-primary">ADMIN</th>
                                 <th className="p-3 text-center text-primary">VENDOR</th>
-                                <th className="p-3 text-center text-primary">MANUFACTURER</th>
                                 <th className="p-3 text-center text-primary">ACTIONS</th>
                               </tr>
                             </thead>
@@ -215,7 +210,6 @@ const AdminUsers = () => {
                                   <td className="p-2 text-center align-middle">{user.email}</td>
                                   <td className="p-2 text-center align-middle">{user.isAdmin ? 'YES' : 'NO'}</td>
                                   <td className="p-2 text-center align-middle">{user.isVendor ? 'YES' : 'NO'}</td>
-                                  <td className="p-2 text-center align-middle">{user.isManufacturer ? 'YES' : 'NO'}</td>
                                   <td className="p-2 text-center align-middle">
                                     <Link
                                       href={`/admin/user/${user._id}`}
